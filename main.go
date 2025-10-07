@@ -15,6 +15,26 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
+func withCORS(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		allowedOrigin := "http://localhost:5173"
+
+		if r.Header.Get("Origin") == allowedOrigin {
+			w.Header().Set("Access-Control-Allow-Origin", allowedOrigin)
+			w.Header().Set("Vary", "Origin")
+		}
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		h.ServeHTTP(w, r)
+	})
+}
+
 func main() {
 	cfg := config.GetConfig()
 
@@ -30,7 +50,7 @@ func main() {
 	}
 
 	gwmux := runtime.NewServeMux()
-	// Register Greeter
+	// Register Stakeholder
 	client := stakeholder.NewStakeholderClient(conn)
 	err = stakeholder.RegisterStakeholderHandlerClient(
 		context.Background(),
@@ -43,7 +63,7 @@ func main() {
 
 	gwServer := &http.Server{
 		Addr:    cfg.Address,
-		Handler: gwmux,
+		Handler: withCORS(gwmux),
 	}
 
 	go func() {
