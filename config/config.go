@@ -10,6 +10,7 @@ import (
 type Config struct {
 	Address                   string
 	StakeHolderServiceAddress string
+	AuthServiceAddress        string
 }
 
 func GetConfig() Config {
@@ -20,6 +21,7 @@ func GetConfig() Config {
 
 	return Config{
 		StakeHolderServiceAddress: os.Getenv("STAKEHOLDER_SERVICE_ADDRESS"),
+		AuthServiceAddress:        os.Getenv("AUTH_SERVICE_ADDRESS"),
 		Address:                   os.Getenv("GATEWAY_ADDRESS"),
 	}
 }
