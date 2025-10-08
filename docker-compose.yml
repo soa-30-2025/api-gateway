@@ -1,0 +1,15 @@
+services:
+  gateway:
+    build: .
+    environment:
+      - STAKEHOLDER_SERVICE_ADDRESS=stakeholder:50051
+      - AUTH_SERVICE_ADDRESS=auth-service:50054
+      - GATEWAY_ADDRESS=:8000
+    ports:
+      - "8000:8000"
+    networks:
+      - soa-network
+
+networks:
+  soa-network:
+    external: true
