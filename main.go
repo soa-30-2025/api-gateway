@@ -13,6 +13,8 @@ import (
 	"api-gateway/proto/auth"
 	"api-gateway/proto/stakeholder"
 
+	"api-gateway/middleware"
+
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -102,9 +104,16 @@ func main() {
 		log.Printf("Registered %s", s.name)
 	}
 
+	jwtMid := middleware.NewJWTMiddlewareFromEnv()
+
+	jwtMid.AllowUnauthenticated = true
+	jwtMid.RequireAuthForAll = false
+
+	handler := jwtMid.Middleware(withCORS(gwmux))
+
 	gwServer := &http.Server{
 		Addr:    cfg.Address,
-		Handler: withCORS(gwmux),
+		Handler: handler,
 	}
 
 	go func() {
