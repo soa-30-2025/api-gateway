@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package follower;
+
+option go_package = "proto/follower";
+
+import "google/api/annotations.proto";
+
+service FollowerService {
+  rpc Follow(FollowRequest) returns (FollowResponse){
+    option (google.api.http) = {
+      post: "/api/follow"
+      body: "*"
+    };
+  }
+
+  rpc Unfollow(UnfollowRequest) returns (UnfollowResponse){
+    option (google.api.http) = {
+      delete: "/api/follow"
+      body: "*"
+    };
+  }
+
+  rpc IsFollowing(IsFollowingRequest) returns (IsFollowingResponse){
+    option (google.api.http) = {
+      get: "/api/users/{follower_id}/is-following/{followee_id}"
+    };
+  }
+
+  rpc GetFollowers(GetFollowersRequest) returns (GetFollowersResponse){
+    option (google.api.http) = {
+      get: "/api/users/{user_id}/followers"
+    };
+  }
+
+  rpc GetFollowing(GetFollowingRequest) returns (GetFollowingResponse){
+    option (google.api.http) = {
+      get: "/api/users/{user_id}/following"
+    };
+  }
+
+  rpc Recommend(RecommendRequest) returns (RecommendResponse){
+    option (google.api.http) = {
+      get: "/api/users/{user_id}/recommendations"
+    };
+  }
+}
+
+message FollowRequest {
+  string follower_id = 1; // who wants to follow
+  string followee_id = 2; // who is followed
+}
+
+message FollowResponse {
+  bool ok = 1;
+}
+
+message UnfollowRequest {
+  string follower_id = 1;
+  string followee_id = 2;
+}
+
+message UnfollowResponse {
+  bool ok = 1;
+}
+
+message IsFollowingRequest {
+  string follower_id = 1;
+  string followee_id = 2;
+}
+
+message IsFollowingResponse {
+  bool following = 1;
+}
+
+message GetFollowersRequest {
+  string user_id = 1;
+  int32 limit = 2;
+  int32 offset = 3;
+}
+
+message GetFollowersResponse {
+  repeated string follower_ids = 1;
+}
+
+message GetFollowingRequest {
+  string user_id = 1;
+  int32 limit = 2;
+  int32 offset = 3;
+}
+
+message GetFollowingResponse {
+  repeated string following_ids = 1;
+}
+
+message RecommendRequest {
+  string user_id = 1;
+  int32 limit = 2;
+}
+
+message Recommendation {
+  string user_id = 1;
+  int32 score = 2;
+}
+
+message RecommendResponse {
+  repeated Recommendation recommendations = 1;
+}
