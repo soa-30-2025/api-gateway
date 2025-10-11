@@ -101,6 +101,45 @@ func local_request_Stakeholder_GetByID_0(ctx context.Context, marshaler runtime.
 	return msg, metadata, err
 }
 
+func request_Stakeholder_GetByUsername_0(ctx context.Context, marshaler runtime.Marshaler, client StakeholderClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetUserByUsername
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	val, ok := pathParams["username"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "username")
+	}
+	protoReq.Username, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "username", err)
+	}
+	msg, err := client.GetByUsername(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_Stakeholder_GetByUsername_0(ctx context.Context, marshaler runtime.Marshaler, server StakeholderServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetUserByUsername
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["username"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "username")
+	}
+	protoReq.Username, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "username", err)
+	}
+	msg, err := server.GetByUsername(ctx, &protoReq)
+	return msg, metadata, err
+}
+
 func request_Stakeholder_UpdateUser_0(ctx context.Context, marshaler runtime.Marshaler, client StakeholderClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq UpdateUserRequest
@@ -258,6 +297,26 @@ func RegisterStakeholderHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		}
 		forward_Stakeholder_GetByID_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodGet, pattern_Stakeholder_GetByUsername_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/stakeholder.Stakeholder/GetByUsername", runtime.WithHTTPPathPattern("/api/users/username/{username}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Stakeholder_GetByUsername_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Stakeholder_GetByUsername_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodPut, pattern_Stakeholder_UpdateUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -392,6 +451,23 @@ func RegisterStakeholderHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		}
 		forward_Stakeholder_GetByID_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodGet, pattern_Stakeholder_GetByUsername_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/stakeholder.Stakeholder/GetByUsername", runtime.WithHTTPPathPattern("/api/users/username/{username}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Stakeholder_GetByUsername_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Stakeholder_GetByUsername_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodPut, pattern_Stakeholder_UpdateUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -447,17 +523,19 @@ func RegisterStakeholderHandlerClient(ctx context.Context, mux *runtime.ServeMux
 }
 
 var (
-	pattern_Stakeholder_CreateUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "users"}, ""))
-	pattern_Stakeholder_GetByID_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "users", "id"}, ""))
-	pattern_Stakeholder_UpdateUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "users", "id"}, ""))
-	pattern_Stakeholder_GetAll_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "users"}, ""))
-	pattern_Stakeholder_BlockUser_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"api", "users", "id", "block"}, ""))
+	pattern_Stakeholder_CreateUser_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "users"}, ""))
+	pattern_Stakeholder_GetByID_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "users", "id"}, ""))
+	pattern_Stakeholder_GetByUsername_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 2}, []string{"api", "users", "username"}, ""))
+	pattern_Stakeholder_UpdateUser_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "users", "id"}, ""))
+	pattern_Stakeholder_GetAll_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "users"}, ""))
+	pattern_Stakeholder_BlockUser_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"api", "users", "id", "block"}, ""))
 )
 
 var (
-	forward_Stakeholder_CreateUser_0 = runtime.ForwardResponseMessage
-	forward_Stakeholder_GetByID_0    = runtime.ForwardResponseMessage
-	forward_Stakeholder_UpdateUser_0 = runtime.ForwardResponseMessage
-	forward_Stakeholder_GetAll_0     = runtime.ForwardResponseMessage
-	forward_Stakeholder_BlockUser_0  = runtime.ForwardResponseMessage
+	forward_Stakeholder_CreateUser_0    = runtime.ForwardResponseMessage
+	forward_Stakeholder_GetByID_0       = runtime.ForwardResponseMessage
+	forward_Stakeholder_GetByUsername_0 = runtime.ForwardResponseMessage
+	forward_Stakeholder_UpdateUser_0    = runtime.ForwardResponseMessage
+	forward_Stakeholder_GetAll_0        = runtime.ForwardResponseMessage
+	forward_Stakeholder_BlockUser_0     = runtime.ForwardResponseMessage
 )

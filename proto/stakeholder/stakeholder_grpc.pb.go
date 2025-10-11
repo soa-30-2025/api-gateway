@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Stakeholder_CreateUser_FullMethodName = "/stakeholder.Stakeholder/CreateUser"
-	Stakeholder_GetByID_FullMethodName    = "/stakeholder.Stakeholder/GetByID"
-	Stakeholder_UpdateUser_FullMethodName = "/stakeholder.Stakeholder/UpdateUser"
-	Stakeholder_GetAll_FullMethodName     = "/stakeholder.Stakeholder/GetAll"
-	Stakeholder_BlockUser_FullMethodName  = "/stakeholder.Stakeholder/BlockUser"
+	Stakeholder_CreateUser_FullMethodName    = "/stakeholder.Stakeholder/CreateUser"
+	Stakeholder_GetByID_FullMethodName       = "/stakeholder.Stakeholder/GetByID"
+	Stakeholder_GetByUsername_FullMethodName = "/stakeholder.Stakeholder/GetByUsername"
+	Stakeholder_UpdateUser_FullMethodName    = "/stakeholder.Stakeholder/UpdateUser"
+	Stakeholder_GetAll_FullMethodName        = "/stakeholder.Stakeholder/GetAll"
+	Stakeholder_BlockUser_FullMethodName     = "/stakeholder.Stakeholder/BlockUser"
 )
 
 // StakeholderClient is the client API for Stakeholder service.
@@ -32,6 +33,7 @@ const (
 type StakeholderClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	GetByID(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	GetByUsername(ctx context.Context, in *GetUserByUsername, opts ...grpc.CallOption) (*GetUserResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	GetAll(ctx context.Context, in *GetAllRequest, opts ...grpc.CallOption) (*GetAllResponse, error)
 	BlockUser(ctx context.Context, in *BlockUserRequest, opts ...grpc.CallOption) (*BlockUserResponse, error)
@@ -59,6 +61,16 @@ func (c *stakeholderClient) GetByID(ctx context.Context, in *GetUserRequest, opt
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserResponse)
 	err := c.cc.Invoke(ctx, Stakeholder_GetByID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *stakeholderClient) GetByUsername(ctx context.Context, in *GetUserByUsername, opts ...grpc.CallOption) (*GetUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserResponse)
+	err := c.cc.Invoke(ctx, Stakeholder_GetByUsername_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -101,6 +113,7 @@ func (c *stakeholderClient) BlockUser(ctx context.Context, in *BlockUserRequest,
 type StakeholderServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	GetByID(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	GetByUsername(context.Context, *GetUserByUsername) (*GetUserResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	GetAll(context.Context, *GetAllRequest) (*GetAllResponse, error)
 	BlockUser(context.Context, *BlockUserRequest) (*BlockUserResponse, error)
@@ -119,6 +132,9 @@ func (UnimplementedStakeholderServer) CreateUser(context.Context, *CreateUserReq
 }
 func (UnimplementedStakeholderServer) GetByID(context.Context, *GetUserRequest) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetByID not implemented")
+}
+func (UnimplementedStakeholderServer) GetByUsername(context.Context, *GetUserByUsername) (*GetUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetByUsername not implemented")
 }
 func (UnimplementedStakeholderServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
@@ -182,6 +198,24 @@ func _Stakeholder_GetByID_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(StakeholderServer).GetByID(ctx, req.(*GetUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Stakeholder_GetByUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserByUsername)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StakeholderServer).GetByUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Stakeholder_GetByUsername_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StakeholderServer).GetByUsername(ctx, req.(*GetUserByUsername))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -254,6 +288,10 @@ var Stakeholder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetByID",
 			Handler:    _Stakeholder_GetByID_Handler,
+		},
+		{
+			MethodName: "GetByUsername",
+			Handler:    _Stakeholder_GetByUsername_Handler,
 		},
 		{
 			MethodName: "UpdateUser",

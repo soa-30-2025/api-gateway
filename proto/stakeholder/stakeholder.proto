@@ -20,6 +20,12 @@ service Stakeholder {
     };
   }
 
+  rpc GetByUsername(GetUserByUsername) returns (GetUserResponse){
+      option (google.api.http) = {
+      get: "/api/users/username/{username}"
+    };
+  }
+
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
     option (google.api.http) = {
       put: "/api/users/{id}"
@@ -63,6 +69,10 @@ message CreateUserRequest {
 
 message CreateUserResponse {
   User user = 1;
+}
+
+message GetUserByUsername {
+  string username = 1;
 }
 
 message GetUserRequest {
