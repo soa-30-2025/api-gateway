@@ -30,6 +30,7 @@ service AuthService {
 }
 
 message CreateAuthRequest {
+  string id = 1;
   string username = 2;
   string email = 3;
   string password = 4;
@@ -46,9 +47,10 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  string access_token = 1;
-  string username = 2;
-  string role = 3;
+  string id = 1;
+  string access_token = 2;
+  string username = 3;
+  string role = 4;
 }
 
 message VerifyRequest {
