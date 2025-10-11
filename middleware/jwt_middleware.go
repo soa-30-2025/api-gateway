@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/golang-jwt/jwt/v5"
-	"google.golang.org/grpc/metadata"
 )
 
 type JWTMiddleware struct {
@@ -70,18 +69,15 @@ func (m *JWTMiddleware) Middleware(next http.Handler) http.Handler {
 			return
 		}
 
-		sub, _ := claims["sub"].(string)
+		id, _ := claims["id"].(string)
 		username, _ := claims["username"].(string)
 		role, _ := claims["role"].(string)
 
-		md := metadata.Pairs(
-			"x-user-id", sub,
-			"x-user-username", username,
-			"x-user-role", role,
-			"x-jwt", tokenStr,
-		)
-		ctx := metadata.NewIncomingContext(r.Context(), md)
+		r.Header.Set("Grpc-Metadata-x-user-id", id)
+		r.Header.Set("Grpc-Metadata-x-user-username", username)
+		r.Header.Set("Grpc-Metadata-x-user-role", role)
+		r.Header.Set("Grpc-Metadata-x-jwt", tokenStr)
 
-		next.ServeHTTP(w, r.WithContext(ctx))
+		next.ServeHTTP(w, r)
 	})
 }
