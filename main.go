@@ -11,6 +11,7 @@ import (
 
 	"api-gateway/config"
 	"api-gateway/proto/auth"
+	"api-gateway/proto/blog"
 	"api-gateway/proto/follower"
 	"api-gateway/proto/stakeholder"
 
@@ -35,6 +36,11 @@ func registerAuth(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientC
 func registerStakeholder(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
 	client := stakeholder.NewStakeholderClient(conn)
 	return stakeholder.RegisterStakeholderHandlerClient(ctx, mux, client)
+}
+
+func registerBlog(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	client := blog.NewBlogServiceClient(conn)
+	return blog.RegisterBlogServiceHandlerClient(ctx, mux, client)
 }
 
 func registerFollower(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
@@ -83,6 +89,7 @@ func main() {
 	svcs := []serviceDef{
 		{name: "auth", address: cfg.AuthServiceAddress, register: registerAuth},
 		{name: "stakeholder", address: cfg.StakeHolderServiceAddress, register: registerStakeholder},
+		{name: "blog", address: cfg.BlogServiceAddress, register: registerBlog},
 		{name: "follower", address: cfg.FollowerServiceAddress, register: registerFollower},
 	}
 
@@ -95,19 +102,17 @@ func main() {
 		log.Printf("Dialing %s -> %s", s.name, s.address)
 		conn, err := dialWithRetry(ctx, s.address, 5, 2*time.Second)
 		if err != nil {
-			for _, c := range conns {
-				_ = c.Close()
-			}
-			log.Fatalf("failed to dial %s: %v", s.name, err)
+			log.Printf("[WARN] Failed to dial %s: %v — skipping registration", s.name, err)
+			continue 
 		}
-		conns = append(conns, conn)
 
 		if err := s.register(ctx, gwmux, conn); err != nil {
-			for _, c := range conns {
-				_ = c.Close()
-			}
-			log.Fatalf("failed to register %s: %v", s.name, err)
+			log.Printf("[WARN] Failed to register %s: %v — skipping", s.name, err)
+			_ = conn.Close()
+			continue
 		}
+
+		conns = append(conns, conn)
 		log.Printf("Registered %s", s.name)
 	}
 

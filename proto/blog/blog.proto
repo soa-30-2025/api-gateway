@@ -1,0 +1,155 @@
+syntax = "proto3";
+
+package blog;
+option go_package = "proto/blog";
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+
+message Blog {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string author_id = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message CreateBlogRequest {
+  string title = 1;
+  string description = 2;
+}
+
+message CreateBlogResponse {
+  Blog blog = 1;
+}
+
+message GetBlogRequest {
+  string id = 1;
+}
+
+message GetBlogResponse {
+  Blog blog = 1;
+}
+
+message Comment {
+  string id = 1;
+  string blog_id = 2;
+  string user_id = 3;
+  string text = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+message CreateCommentRequest {
+  string blog_id = 1;
+  string text = 2;
+}
+
+message CreateCommentResponse {
+  Comment comment = 1;
+}
+
+message GetCommentsByBlogRequest {
+  string blog_id = 1;
+}
+
+message GetCommentsByBlogResponse {
+  repeated Comment comments = 1;
+}
+
+message UpdateCommentRequest {
+  string id = 1;
+  string text = 2;
+}
+
+message UpdateCommentResponse {
+  Comment comment = 1;
+}
+
+message LikeRequest {
+  string blog_id = 1;
+}
+
+message LikeResponse {
+  int32 likes_count = 1;
+}
+
+message GetAllBlogsRequest {}
+
+message GetAllBlogsResponse {
+  repeated Blog blogs = 1;
+}
+
+message GetLikedUsersRequest {
+  string blog_id = 1;
+}
+
+message GetLikedUsersResponse {
+  repeated string user_ids = 1;
+}
+
+service BlogService {
+  rpc CreateBlog (CreateBlogRequest) returns (CreateBlogResponse) {
+    option (google.api.http) = {
+        post: "/api/blog"
+        body: "*"
+        };
+  }
+
+  rpc GetBlog (GetBlogRequest) returns (GetBlogResponse) {
+    option (google.api.http) = {
+    get: "/api/blog/{id}"
+    };
+  }
+
+  rpc CreateComment (CreateCommentRequest) returns (CreateCommentResponse) {
+    option (google.api.http) = {
+    post: "/api/comment"
+    body: "*"
+    };
+  }
+
+  rpc GetCommentsByBlog (GetCommentsByBlogRequest) returns (GetCommentsByBlogResponse) {
+    option (google.api.http) = {
+    get: "/api/comments/{blog_id}"
+    };
+  }
+
+  rpc UpdateComment (UpdateCommentRequest) returns (UpdateCommentResponse) {
+    option (google.api.http) = {
+    patch: "/api/comment/{id}"
+    body: "*"
+    };
+  }
+
+  rpc LikeBlog (LikeRequest) returns (LikeResponse) {
+    option (google.api.http) = {
+    post: "/api/blog/{blog_id}/like"
+    };
+  }
+
+  rpc UnlikeBlog (LikeRequest) returns (LikeResponse) {
+    option (google.api.http) = {
+    delete: "/api/blog/{blog_id}/dislike"
+    };
+  }
+
+  rpc GetLikesCount (LikeRequest) returns (LikeResponse) {
+    option (google.api.http) = {
+    get: "/api/blog/{blog_id}/likes"
+    };
+  }
+
+  rpc GetAllBlogs (GetAllBlogsRequest) returns (GetAllBlogsResponse) {
+    option (google.api.http) = {
+    get: "/api/blogs"
+    };
+  }
+
+  rpc GetLikedUsers (GetLikedUsersRequest) returns (GetLikedUsersResponse) {
+    option (google.api.http) = {
+    get: "/api/blogs/liked-users"
+    };
+  }
+}
+
