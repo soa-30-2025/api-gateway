@@ -14,6 +14,7 @@ import (
 	"api-gateway/proto/blog"
 	"api-gateway/proto/follower"
 	"api-gateway/proto/stakeholder"
+	"api-gateway/proto/tour"
 
 	"api-gateway/middleware"
 
@@ -41,6 +42,11 @@ func registerStakeholder(ctx context.Context, mux *runtime.ServeMux, conn *grpc.
 func registerBlog(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
 	client := blog.NewBlogServiceClient(conn)
 	return blog.RegisterBlogServiceHandlerClient(ctx, mux, client)
+}
+
+func registerTour(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	client := tour.NewTourServiceClient(conn)
+	return tour.RegisterTourServiceHandlerClient(ctx, mux, client)
 }
 
 func registerFollower(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
@@ -87,6 +93,7 @@ func dialWithRetry(ctx context.Context, target string, attempts int, delay time.
 func main() {
 	cfg := config.GetConfig()
 	svcs := []serviceDef{
+		{name: "tour", address: cfg.TourServiceAddress, register: registerTour},
 		{name: "auth", address: cfg.AuthServiceAddress, register: registerAuth},
 		{name: "stakeholder", address: cfg.StakeHolderServiceAddress, register: registerStakeholder},
 		{name: "blog", address: cfg.BlogServiceAddress, register: registerBlog},

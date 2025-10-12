@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package tour;
+option go_package = "proto/tour";
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+
+message Tour {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    string difficulty = 4;
+    repeated string tags = 5;
+    double price = 6;
+    string status = 7;
+    string author_id = 8;
+    google.protobuf.Timestamp created_at = 9;
+}
+
+message CreateTourRequest {
+    string name = 1;
+    string description = 2;
+    string difficulty = 3;
+    repeated string tags = 4;
+}
+
+message CreateTourResponse {
+    Tour tour = 1;
+}
+
+message GetToursByAuthorRequest {
+  string author_id = 1;
+}
+
+message GetToursByAuthorResponse {
+  repeated Tour tours = 1;
+}
+
+message GetTourByIdRequest {
+    string id = 1;
+}
+
+message GetTourByIdResponse {
+    Tour tour = 1;
+}
+
+message GetAllToursRequest {}
+
+message GetAllToursResponse {
+  repeated Tour tours = 1;
+}
+
+service TourService {
+    rpc CreateTour(CreateTourRequest) returns (CreateTourResponse) {
+        option (google.api.http) = {
+        post: "/api/tour"
+        body: "*"
+        };
+    }
+
+    rpc GetToursByAuthor (GetToursByAuthorRequest) returns (GetToursByAuthorResponse) {
+        option (google.api.http) = {
+        get: "/api/tours/{author_id}"
+        };
+    }
+
+    rpc GetTourById(GetTourByIdRequest) returns (GetTourByIdResponse) {
+        option (google.api.http) = {
+        get: "/api/tour/{id}"
+        };
+    }
+
+    rpc GetAllTours(GetAllToursRequest) returns (GetAllToursResponse) {
+        option (google.api.http) = {
+        get: "/api/tours"
+        };
+    }
+}
