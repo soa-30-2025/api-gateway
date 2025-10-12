@@ -12,6 +12,7 @@ import (
 	"api-gateway/config"
 	"api-gateway/proto/auth"
 	"api-gateway/proto/blog"
+	"api-gateway/proto/follower"
 	"api-gateway/proto/stakeholder"
 
 	"api-gateway/middleware"
@@ -40,6 +41,11 @@ func registerStakeholder(ctx context.Context, mux *runtime.ServeMux, conn *grpc.
 func registerBlog(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
 	client := blog.NewBlogServiceClient(conn)
 	return blog.RegisterBlogServiceHandlerClient(ctx, mux, client)
+}
+
+func registerFollower(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	client := follower.NewFollowerServiceClient(conn)
+	return follower.RegisterFollowerServiceHandlerClient(ctx, mux, client)
 }
 
 func withCORS(h http.Handler) http.Handler {
@@ -84,6 +90,7 @@ func main() {
 		{name: "auth", address: cfg.AuthServiceAddress, register: registerAuth},
 		{name: "stakeholder", address: cfg.StakeHolderServiceAddress, register: registerStakeholder},
 		{name: "blog", address: cfg.BlogServiceAddress, register: registerBlog},
+		{name: "follower", address: cfg.FollowerServiceAddress, register: registerFollower},
 	}
 
 	gwmux := runtime.NewServeMux()
