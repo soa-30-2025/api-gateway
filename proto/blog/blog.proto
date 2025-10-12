@@ -17,7 +17,6 @@ message Blog {
 message CreateBlogRequest {
   string title = 1;
   string description = 2;
-  string author_id = 3;
 }
 
 message CreateBlogResponse {
@@ -43,8 +42,7 @@ message Comment {
 
 message CreateCommentRequest {
   string blog_id = 1;
-  string user_id = 2;
-  string text = 3;
+  string text = 2;
 }
 
 message CreateCommentResponse {
@@ -70,11 +68,24 @@ message UpdateCommentResponse {
 
 message LikeRequest {
   string blog_id = 1;
-  string user_id = 2;
 }
 
 message LikeResponse {
   int32 likes_count = 1;
+}
+
+message GetAllBlogsRequest {}
+
+message GetAllBlogsResponse {
+  repeated Blog blogs = 1;
+}
+
+message GetLikedUsersRequest {
+  string blog_id = 1;
+}
+
+message GetLikedUsersResponse {
+  repeated string user_ids = 1;
 }
 
 service BlogService {
@@ -126,6 +137,18 @@ service BlogService {
   rpc GetLikesCount (LikeRequest) returns (LikeResponse) {
     option (google.api.http) = {
     get: "/api/blog/{blog_id}/likes"
+    };
+  }
+
+  rpc GetAllBlogs (GetAllBlogsRequest) returns (GetAllBlogsResponse) {
+    option (google.api.http) = {
+    get: "/api/blogs"
+    };
+  }
+
+  rpc GetLikedUsers (GetLikedUsersRequest) returns (GetLikedUsersResponse) {
+    option (google.api.http) = {
+    get: "/api/blogs/liked-users"
     };
   }
 }
