@@ -18,6 +18,17 @@ message Tour {
     google.protobuf.Timestamp created_at = 9;
 }
 
+message Review {
+  string id = 1;
+  string tour_id = 2;
+  string tourist_id = 3;
+  int32 rating = 4;
+  string comment = 5;
+  google.protobuf.Timestamp visit_date = 6;
+  repeated string image_urls = 7; 
+  google.protobuf.Timestamp created_at = 8;
+}
+
 message CreateTourRequest {
     string name = 1;
     string description = 2;
@@ -51,6 +62,32 @@ message GetAllToursResponse {
   repeated Tour tours = 1;
 }
 
+message CreateReviewRequest {
+  string tour_id = 1;
+  int32 rating = 2;
+  string comment = 3;
+  google.protobuf.Timestamp visit_date = 4;
+  repeated Image images = 5;
+}
+
+message Image {
+  bytes data = 1;
+  string filename = 2;
+  string content_type = 3;
+}
+
+message CreateReviewResponse {
+  Review review = 1;
+}
+
+message GetReviewsByTourRequest { 
+  string tourId = 1; 
+} 
+
+message GetReviewsByTourResponse { 
+  repeated Review reviews = 1; 
+}
+
 service TourService {
     rpc CreateTour(CreateTourRequest) returns (CreateTourResponse) {
         option (google.api.http) = {
@@ -74,6 +111,19 @@ service TourService {
     rpc GetAllTours(GetAllToursRequest) returns (GetAllToursResponse) {
         option (google.api.http) = {
         get: "/api/tours"
+        };
+    }
+
+    rpc CreateReview(CreateReviewRequest) returns (CreateReviewResponse) {
+        option (google.api.http) = {
+        post: "/api/review"
+        body: "*"
+        };
+    }
+
+    rpc GetReviewsByTour(GetReviewsByTourRequest) returns (GetReviewsByTourResponse) {
+        option (google.api.http) = {
+        get: "/api/reviews/{tourId}"
         };
     }
 }
