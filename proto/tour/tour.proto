@@ -7,15 +7,33 @@ import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
 
 message Tour {
-    string id = 1;
-    string name = 2;
-    string description = 3;
-    string difficulty = 4;
-    repeated string tags = 5;
-    double price = 6;
-    string status = 7;
-    string author_id = 8;
-    google.protobuf.Timestamp created_at = 9;
+  string id = 1;
+  string author_id = 2;
+  string name = 3;
+  string description = 4;
+  string difficulty = 5;
+  repeated string tags = 6;
+  double price = 7;
+  double length_km = 8;
+  string status = 9;
+  map<string,int32> travel_times = 10;
+  google.protobuf.Timestamp created_at = 11;
+  string updated_at = 12;
+  string published_at = 13;
+  string archived_at = 14;
+}
+
+message Keypoint {
+  string id = 1;
+  string tour_id = 2;
+  int32 order = 3;
+  string name = 4;
+  string description = 5;
+  double lat = 6;
+  double lon = 7;
+  string image_path = 8;
+  string created_at = 9;
+  string updated_at = 10;
 }
 
 message Review {
@@ -34,6 +52,7 @@ message CreateTourRequest {
     string description = 2;
     string difficulty = 3;
     repeated string tags = 4;
+    map<string,int32> travel_times = 5;
 }
 
 message CreateTourResponse {
@@ -48,13 +67,8 @@ message GetToursByAuthorResponse {
   repeated Tour tours = 1;
 }
 
-message GetTourByIdRequest {
-    string id = 1;
-}
-
-message GetTourByIdResponse {
-    Tour tour = 1;
-}
+message GetTourRequest { string id = 1; }
+message GetTourResponse { Tour tour = 1; repeated Keypoint keypoints = 2; }
 
 message GetAllToursRequest {}
 
@@ -88,6 +102,63 @@ message GetReviewsByTourResponse {
   repeated Review reviews = 1; 
 }
 
+message UpdateTourRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string difficulty = 4;
+  repeated string tags = 5;
+  map<string,int32> travel_times = 6;
+  double length_km = 7;
+  string status = 8;
+}
+message UpdateTourResponse { Tour tour = 1; }
+
+message AddKeypointRequest {
+  string tour_id = 1;
+  int32 order = 2;
+  string name = 3;
+  string description = 4;
+  double lat = 5;
+  double lon = 6;
+  bytes image = 7; // optional raw bytes
+  string image_filename = 8; // optional
+  string image_content_type = 9; // optional
+}
+message AddKeypointResponse { Keypoint keypoint = 1; }
+message GetKeypointImageRequest { string keypoint_id = 1; }
+message ImageChunk { bytes data = 1; }
+
+
+message ReorderKeypointsRequest {
+  string tour_id = 1;
+  repeated string ordered_ids = 2;
+}
+
+message ReorderKeypointsResponse {
+  bool ok = 1;
+}
+
+message UpdateKeypointRequest {
+  string keypoint_id = 1;
+  string name = 2;
+  string description = 3;
+  double lat = 4;
+  double lon = 5;
+}
+
+message UpdateKeypointResponse {
+  Keypoint keypoint = 1;
+}
+
+message DeleteKeypointRequest {
+  string keypoint_id = 1;
+}
+
+message DeleteKeypointResponse {
+  bool ok = 1;
+}
+
 service TourService {
     rpc CreateTour(CreateTourRequest) returns (CreateTourResponse) {
         option (google.api.http) = {
@@ -96,13 +167,13 @@ service TourService {
         };
     }
 
-    rpc GetToursByAuthor (GetToursByAuthorRequest) returns (GetToursByAuthorResponse) {
+    rpc GetToursByAuthor(GetToursByAuthorRequest) returns (GetToursByAuthorResponse) {
         option (google.api.http) = {
         get: "/api/tours/{author_id}"
         };
     }
 
-    rpc GetTourById(GetTourByIdRequest) returns (GetTourByIdResponse) {
+    rpc GetTour(GetTourRequest) returns (GetTourResponse) {
         option (google.api.http) = {
         get: "/api/tour/{id}"
         };
@@ -117,6 +188,12 @@ service TourService {
     rpc CreateReview(CreateReviewRequest) returns (CreateReviewResponse) {
         option (google.api.http) = {
         post: "/api/review"
+        };
+    }
+    
+    rpc UpdateTour(UpdateTourRequest) returns (UpdateTourResponse) {
+        option (google.api.http) = {
+        put: "/api/tour/{id}"
         body: "*"
         };
     }
@@ -125,5 +202,37 @@ service TourService {
         option (google.api.http) = {
         get: "/api/reviews/{tourId}"
         };
+    }
+    rpc AddKeypoint(AddKeypointRequest) returns (AddKeypointResponse) {
+        option (google.api.http) = {
+        post: "/api/tour/{tour_id}/keypoints"
+        body: "*"
+        };
+    }
+
+    rpc GetKeypointImage(GetKeypointImageRequest) returns (stream ImageChunk) {
+        option (google.api.http) = {
+        get: "/api/keypoints/{keypoint_id}/image"
+        };
+    }
+
+    rpc ReorderKeypoints(ReorderKeypointsRequest) returns (ReorderKeypointsResponse) {
+      option (google.api.http) = {
+        post: "/api/tours/{tour_id}/keypoints/reorder"
+        body: "*"
+      };
+    }
+
+    rpc UpdateKeypoint(UpdateKeypointRequest) returns (UpdateKeypointResponse) {
+      option (google.api.http) = {
+        put: "/api/keypoints/{keypoint_id}"
+        body: "*"
+      };
+    }
+
+    rpc DeleteKeypoint(DeleteKeypointRequest) returns (DeleteKeypointResponse) {
+      option (google.api.http) = {
+        delete: "/api/keypoints/{keypoint_id}"
+      };
     }
 }
