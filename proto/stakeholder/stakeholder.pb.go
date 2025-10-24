@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -686,11 +687,307 @@ func (x *GetAllResponse) GetUsers() []*User {
 	return nil
 }
 
+type Position struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TouristId     string                 `protobuf:"bytes,1,opt,name=tourist_id,json=touristId,proto3" json:"tourist_id,omitempty"`
+	Latitude      float64                `protobuf:"fixed64,2,opt,name=latitude,proto3" json:"latitude,omitempty"`
+	Longitude     float64                `protobuf:"fixed64,3,opt,name=longitude,proto3" json:"longitude,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	LastUpdated   *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=last_updated,json=lastUpdated,proto3" json:"last_updated,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Position) Reset() {
+	*x = Position{}
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Position) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Position) ProtoMessage() {}
+
+func (x *Position) ProtoReflect() protoreflect.Message {
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Position.ProtoReflect.Descriptor instead.
+func (*Position) Descriptor() ([]byte, []int) {
+	return file_stakeholder_stakeholder_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *Position) GetTouristId() string {
+	if x != nil {
+		return x.TouristId
+	}
+	return ""
+}
+
+func (x *Position) GetLatitude() float64 {
+	if x != nil {
+		return x.Latitude
+	}
+	return 0
+}
+
+func (x *Position) GetLongitude() float64 {
+	if x != nil {
+		return x.Longitude
+	}
+	return 0
+}
+
+func (x *Position) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *Position) GetLastUpdated() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastUpdated
+	}
+	return nil
+}
+
+type SetPositionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Latitude      float64                `protobuf:"fixed64,1,opt,name=latitude,proto3" json:"latitude,omitempty"`
+	Longitude     float64                `protobuf:"fixed64,2,opt,name=longitude,proto3" json:"longitude,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetPositionRequest) Reset() {
+	*x = SetPositionRequest{}
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetPositionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPositionRequest) ProtoMessage() {}
+
+func (x *SetPositionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPositionRequest.ProtoReflect.Descriptor instead.
+func (*SetPositionRequest) Descriptor() ([]byte, []int) {
+	return file_stakeholder_stakeholder_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *SetPositionRequest) GetLatitude() float64 {
+	if x != nil {
+		return x.Latitude
+	}
+	return 0
+}
+
+func (x *SetPositionRequest) GetLongitude() float64 {
+	if x != nil {
+		return x.Longitude
+	}
+	return 0
+}
+
+type GetPositionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPositionRequest) Reset() {
+	*x = GetPositionRequest{}
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPositionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPositionRequest) ProtoMessage() {}
+
+func (x *GetPositionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPositionRequest.ProtoReflect.Descriptor instead.
+func (*GetPositionRequest) Descriptor() ([]byte, []int) {
+	return file_stakeholder_stakeholder_proto_rawDescGZIP(), []int{14}
+}
+
+type DeletePositionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeletePositionRequest) Reset() {
+	*x = DeletePositionRequest{}
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeletePositionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePositionRequest) ProtoMessage() {}
+
+func (x *DeletePositionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePositionRequest.ProtoReflect.Descriptor instead.
+func (*DeletePositionRequest) Descriptor() ([]byte, []int) {
+	return file_stakeholder_stakeholder_proto_rawDescGZIP(), []int{15}
+}
+
+type PositionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Position      *Position              `protobuf:"bytes,1,opt,name=position,proto3" json:"position,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PositionResponse) Reset() {
+	*x = PositionResponse{}
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PositionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PositionResponse) ProtoMessage() {}
+
+func (x *PositionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PositionResponse.ProtoReflect.Descriptor instead.
+func (*PositionResponse) Descriptor() ([]byte, []int) {
+	return file_stakeholder_stakeholder_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *PositionResponse) GetPosition() *Position {
+	if x != nil {
+		return x.Position
+	}
+	return nil
+}
+
+type DeletePositionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeletePositionResponse) Reset() {
+	*x = DeletePositionResponse{}
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeletePositionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePositionResponse) ProtoMessage() {}
+
+func (x *DeletePositionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_stakeholder_stakeholder_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePositionResponse.ProtoReflect.Descriptor instead.
+func (*DeletePositionResponse) Descriptor() ([]byte, []int) {
+	return file_stakeholder_stakeholder_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *DeletePositionResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *DeletePositionResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_stakeholder_stakeholder_proto protoreflect.FileDescriptor
 
 const file_stakeholder_stakeholder_proto_rawDesc = "" +
 	"\n" +
-	"\x1dstakeholder/stakeholder.proto\x12\vstakeholder\x1a\x1cgoogle/api/annotations.proto\"\xff\x01\n" +
+	"\x1dstakeholder/stakeholder.proto\x12\vstakeholder\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xff\x01\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
@@ -734,7 +1031,25 @@ const file_stakeholder_stakeholder_proto_rawDesc = "" +
 	"\x04user\x18\x01 \x01(\v2\x11.stakeholder.UserR\x04user\"\x0f\n" +
 	"\rGetAllRequest\"9\n" +
 	"\x0eGetAllResponse\x12'\n" +
-	"\x05users\x18\x01 \x03(\v2\x11.stakeholder.UserR\x05users2\xf9\x04\n" +
+	"\x05users\x18\x01 \x03(\v2\x11.stakeholder.UserR\x05users\"\xdd\x01\n" +
+	"\bPosition\x12\x1d\n" +
+	"\n" +
+	"tourist_id\x18\x01 \x01(\tR\ttouristId\x12\x1a\n" +
+	"\blatitude\x18\x02 \x01(\x01R\blatitude\x12\x1c\n" +
+	"\tlongitude\x18\x03 \x01(\x01R\tlongitude\x129\n" +
+	"\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12=\n" +
+	"\flast_updated\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\vlastUpdated\"N\n" +
+	"\x12SetPositionRequest\x12\x1a\n" +
+	"\blatitude\x18\x01 \x01(\x01R\blatitude\x12\x1c\n" +
+	"\tlongitude\x18\x02 \x01(\x01R\tlongitude\"\x14\n" +
+	"\x12GetPositionRequest\"\x17\n" +
+	"\x15DeletePositionRequest\"E\n" +
+	"\x10PositionResponse\x121\n" +
+	"\bposition\x18\x01 \x01(\v2\x15.stakeholder.PositionR\bposition\"L\n" +
+	"\x16DeletePositionResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage2\xe1\a\n" +
 	"\vStakeholder\x12d\n" +
 	"\n" +
 	"CreateUser\x12\x1e.stakeholder.CreateUserRequest\x1a\x1f.stakeholder.CreateUserResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
@@ -745,7 +1060,10 @@ const file_stakeholder_stakeholder_proto_rawDesc = "" +
 	"UpdateUser\x12\x1e.stakeholder.UpdateUserRequest\x1a\x1f.stakeholder.UpdateUserResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\x1a\x0f/api/users/{id}\x12U\n" +
 	"\x06GetAll\x12\x1a.stakeholder.GetAllRequest\x1a\x1b.stakeholder.GetAllResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
 	"/api/users\x12l\n" +
-	"\tBlockUser\x12\x1d.stakeholder.BlockUserRequest\x1a\x1e.stakeholder.BlockUserResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*2\x15/api/users/{id}/blockB\x13Z\x11proto/stakeholderb\x06proto3"
+	"\tBlockUser\x12\x1d.stakeholder.BlockUserRequest\x1a\x1e.stakeholder.BlockUserResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*2\x15/api/users/{id}/block\x12t\n" +
+	"\x12SetCurrentPosition\x12\x1f.stakeholder.SetPositionRequest\x1a\x1d.stakeholder.PositionResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/users/position\x12q\n" +
+	"\x12GetCurrentPosition\x12\x1f.stakeholder.GetPositionRequest\x1a\x1d.stakeholder.PositionResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/api/users/position\x12}\n" +
+	"\x15DeleteCurrentPosition\x12\".stakeholder.DeletePositionRequest\x1a#.stakeholder.DeletePositionResponse\"\x1b\x82\xd3\xe4\x93\x02\x15*\x13/api/users/positionB\x13Z\x11proto/stakeholderb\x06proto3"
 
 var (
 	file_stakeholder_stakeholder_proto_rawDescOnce sync.Once
@@ -759,20 +1077,27 @@ func file_stakeholder_stakeholder_proto_rawDescGZIP() []byte {
 	return file_stakeholder_stakeholder_proto_rawDescData
 }
 
-var file_stakeholder_stakeholder_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_stakeholder_stakeholder_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_stakeholder_stakeholder_proto_goTypes = []any{
-	(*User)(nil),               // 0: stakeholder.User
-	(*CreateUserRequest)(nil),  // 1: stakeholder.CreateUserRequest
-	(*CreateUserResponse)(nil), // 2: stakeholder.CreateUserResponse
-	(*GetUserByUsername)(nil),  // 3: stakeholder.GetUserByUsername
-	(*GetUserRequest)(nil),     // 4: stakeholder.GetUserRequest
-	(*GetUserResponse)(nil),    // 5: stakeholder.GetUserResponse
-	(*UpdateUserRequest)(nil),  // 6: stakeholder.UpdateUserRequest
-	(*UpdateUserResponse)(nil), // 7: stakeholder.UpdateUserResponse
-	(*BlockUserRequest)(nil),   // 8: stakeholder.BlockUserRequest
-	(*BlockUserResponse)(nil),  // 9: stakeholder.BlockUserResponse
-	(*GetAllRequest)(nil),      // 10: stakeholder.GetAllRequest
-	(*GetAllResponse)(nil),     // 11: stakeholder.GetAllResponse
+	(*User)(nil),                   // 0: stakeholder.User
+	(*CreateUserRequest)(nil),      // 1: stakeholder.CreateUserRequest
+	(*CreateUserResponse)(nil),     // 2: stakeholder.CreateUserResponse
+	(*GetUserByUsername)(nil),      // 3: stakeholder.GetUserByUsername
+	(*GetUserRequest)(nil),         // 4: stakeholder.GetUserRequest
+	(*GetUserResponse)(nil),        // 5: stakeholder.GetUserResponse
+	(*UpdateUserRequest)(nil),      // 6: stakeholder.UpdateUserRequest
+	(*UpdateUserResponse)(nil),     // 7: stakeholder.UpdateUserResponse
+	(*BlockUserRequest)(nil),       // 8: stakeholder.BlockUserRequest
+	(*BlockUserResponse)(nil),      // 9: stakeholder.BlockUserResponse
+	(*GetAllRequest)(nil),          // 10: stakeholder.GetAllRequest
+	(*GetAllResponse)(nil),         // 11: stakeholder.GetAllResponse
+	(*Position)(nil),               // 12: stakeholder.Position
+	(*SetPositionRequest)(nil),     // 13: stakeholder.SetPositionRequest
+	(*GetPositionRequest)(nil),     // 14: stakeholder.GetPositionRequest
+	(*DeletePositionRequest)(nil),  // 15: stakeholder.DeletePositionRequest
+	(*PositionResponse)(nil),       // 16: stakeholder.PositionResponse
+	(*DeletePositionResponse)(nil), // 17: stakeholder.DeletePositionResponse
+	(*timestamppb.Timestamp)(nil),  // 18: google.protobuf.Timestamp
 }
 var file_stakeholder_stakeholder_proto_depIdxs = []int32{
 	0,  // 0: stakeholder.CreateUserResponse.user:type_name -> stakeholder.User
@@ -780,23 +1105,32 @@ var file_stakeholder_stakeholder_proto_depIdxs = []int32{
 	0,  // 2: stakeholder.UpdateUserResponse.user:type_name -> stakeholder.User
 	0,  // 3: stakeholder.BlockUserResponse.user:type_name -> stakeholder.User
 	0,  // 4: stakeholder.GetAllResponse.users:type_name -> stakeholder.User
-	1,  // 5: stakeholder.Stakeholder.CreateUser:input_type -> stakeholder.CreateUserRequest
-	4,  // 6: stakeholder.Stakeholder.GetByID:input_type -> stakeholder.GetUserRequest
-	3,  // 7: stakeholder.Stakeholder.GetByUsername:input_type -> stakeholder.GetUserByUsername
-	6,  // 8: stakeholder.Stakeholder.UpdateUser:input_type -> stakeholder.UpdateUserRequest
-	10, // 9: stakeholder.Stakeholder.GetAll:input_type -> stakeholder.GetAllRequest
-	8,  // 10: stakeholder.Stakeholder.BlockUser:input_type -> stakeholder.BlockUserRequest
-	2,  // 11: stakeholder.Stakeholder.CreateUser:output_type -> stakeholder.CreateUserResponse
-	5,  // 12: stakeholder.Stakeholder.GetByID:output_type -> stakeholder.GetUserResponse
-	5,  // 13: stakeholder.Stakeholder.GetByUsername:output_type -> stakeholder.GetUserResponse
-	7,  // 14: stakeholder.Stakeholder.UpdateUser:output_type -> stakeholder.UpdateUserResponse
-	11, // 15: stakeholder.Stakeholder.GetAll:output_type -> stakeholder.GetAllResponse
-	9,  // 16: stakeholder.Stakeholder.BlockUser:output_type -> stakeholder.BlockUserResponse
-	11, // [11:17] is the sub-list for method output_type
-	5,  // [5:11] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	18, // 5: stakeholder.Position.created_at:type_name -> google.protobuf.Timestamp
+	18, // 6: stakeholder.Position.last_updated:type_name -> google.protobuf.Timestamp
+	12, // 7: stakeholder.PositionResponse.position:type_name -> stakeholder.Position
+	1,  // 8: stakeholder.Stakeholder.CreateUser:input_type -> stakeholder.CreateUserRequest
+	4,  // 9: stakeholder.Stakeholder.GetByID:input_type -> stakeholder.GetUserRequest
+	3,  // 10: stakeholder.Stakeholder.GetByUsername:input_type -> stakeholder.GetUserByUsername
+	6,  // 11: stakeholder.Stakeholder.UpdateUser:input_type -> stakeholder.UpdateUserRequest
+	10, // 12: stakeholder.Stakeholder.GetAll:input_type -> stakeholder.GetAllRequest
+	8,  // 13: stakeholder.Stakeholder.BlockUser:input_type -> stakeholder.BlockUserRequest
+	13, // 14: stakeholder.Stakeholder.SetCurrentPosition:input_type -> stakeholder.SetPositionRequest
+	14, // 15: stakeholder.Stakeholder.GetCurrentPosition:input_type -> stakeholder.GetPositionRequest
+	15, // 16: stakeholder.Stakeholder.DeleteCurrentPosition:input_type -> stakeholder.DeletePositionRequest
+	2,  // 17: stakeholder.Stakeholder.CreateUser:output_type -> stakeholder.CreateUserResponse
+	5,  // 18: stakeholder.Stakeholder.GetByID:output_type -> stakeholder.GetUserResponse
+	5,  // 19: stakeholder.Stakeholder.GetByUsername:output_type -> stakeholder.GetUserResponse
+	7,  // 20: stakeholder.Stakeholder.UpdateUser:output_type -> stakeholder.UpdateUserResponse
+	11, // 21: stakeholder.Stakeholder.GetAll:output_type -> stakeholder.GetAllResponse
+	9,  // 22: stakeholder.Stakeholder.BlockUser:output_type -> stakeholder.BlockUserResponse
+	16, // 23: stakeholder.Stakeholder.SetCurrentPosition:output_type -> stakeholder.PositionResponse
+	16, // 24: stakeholder.Stakeholder.GetCurrentPosition:output_type -> stakeholder.PositionResponse
+	17, // 25: stakeholder.Stakeholder.DeleteCurrentPosition:output_type -> stakeholder.DeletePositionResponse
+	17, // [17:26] is the sub-list for method output_type
+	8,  // [8:17] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_stakeholder_stakeholder_proto_init() }
@@ -810,7 +1144,7 @@ func file_stakeholder_stakeholder_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_stakeholder_stakeholder_proto_rawDesc), len(file_stakeholder_stakeholder_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
