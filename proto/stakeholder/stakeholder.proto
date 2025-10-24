@@ -5,6 +5,7 @@ package stakeholder;
 option go_package = "proto/stakeholder";
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
 service Stakeholder {
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
@@ -43,6 +44,25 @@ service Stakeholder {
     option (google.api.http) = {
       patch: "/api/users/{id}/block"
       body: "*"
+    };
+  }
+
+  rpc SetCurrentPosition(SetPositionRequest) returns (PositionResponse) {
+    option (google.api.http) = {
+      post: "/api/users/position"
+      body: "*"
+    };
+  }
+
+  rpc GetCurrentPosition(GetPositionRequest) returns (PositionResponse) {
+    option (google.api.http) = {
+      get: "/api/users/position"
+    };
+  }
+
+  rpc DeleteCurrentPosition(DeletePositionRequest) returns (DeletePositionResponse) {
+    option (google.api.http) = {
+      delete: "/api/users/position"
     };
   }
 }
@@ -109,4 +129,30 @@ message GetAllRequest {}
 
 message GetAllResponse {
   repeated User users = 1;
+}
+
+message Position {
+  string tourist_id = 1;
+  double latitude = 2;
+  double longitude = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp last_updated = 5;
+}
+
+message SetPositionRequest {
+  double latitude = 1;
+  double longitude = 2;
+}
+
+message GetPositionRequest {}
+
+message DeletePositionRequest {}
+
+message PositionResponse {
+  Position position = 1;
+}
+
+message DeletePositionResponse {
+  bool success = 1;
+  string message = 2;
 }

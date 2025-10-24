@@ -19,12 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Stakeholder_CreateUser_FullMethodName    = "/stakeholder.Stakeholder/CreateUser"
-	Stakeholder_GetByID_FullMethodName       = "/stakeholder.Stakeholder/GetByID"
-	Stakeholder_GetByUsername_FullMethodName = "/stakeholder.Stakeholder/GetByUsername"
-	Stakeholder_UpdateUser_FullMethodName    = "/stakeholder.Stakeholder/UpdateUser"
-	Stakeholder_GetAll_FullMethodName        = "/stakeholder.Stakeholder/GetAll"
-	Stakeholder_BlockUser_FullMethodName     = "/stakeholder.Stakeholder/BlockUser"
+	Stakeholder_CreateUser_FullMethodName            = "/stakeholder.Stakeholder/CreateUser"
+	Stakeholder_GetByID_FullMethodName               = "/stakeholder.Stakeholder/GetByID"
+	Stakeholder_GetByUsername_FullMethodName         = "/stakeholder.Stakeholder/GetByUsername"
+	Stakeholder_UpdateUser_FullMethodName            = "/stakeholder.Stakeholder/UpdateUser"
+	Stakeholder_GetAll_FullMethodName                = "/stakeholder.Stakeholder/GetAll"
+	Stakeholder_BlockUser_FullMethodName             = "/stakeholder.Stakeholder/BlockUser"
+	Stakeholder_SetCurrentPosition_FullMethodName    = "/stakeholder.Stakeholder/SetCurrentPosition"
+	Stakeholder_GetCurrentPosition_FullMethodName    = "/stakeholder.Stakeholder/GetCurrentPosition"
+	Stakeholder_DeleteCurrentPosition_FullMethodName = "/stakeholder.Stakeholder/DeleteCurrentPosition"
 )
 
 // StakeholderClient is the client API for Stakeholder service.
@@ -37,6 +40,9 @@ type StakeholderClient interface {
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	GetAll(ctx context.Context, in *GetAllRequest, opts ...grpc.CallOption) (*GetAllResponse, error)
 	BlockUser(ctx context.Context, in *BlockUserRequest, opts ...grpc.CallOption) (*BlockUserResponse, error)
+	SetCurrentPosition(ctx context.Context, in *SetPositionRequest, opts ...grpc.CallOption) (*PositionResponse, error)
+	GetCurrentPosition(ctx context.Context, in *GetPositionRequest, opts ...grpc.CallOption) (*PositionResponse, error)
+	DeleteCurrentPosition(ctx context.Context, in *DeletePositionRequest, opts ...grpc.CallOption) (*DeletePositionResponse, error)
 }
 
 type stakeholderClient struct {
@@ -107,6 +113,36 @@ func (c *stakeholderClient) BlockUser(ctx context.Context, in *BlockUserRequest,
 	return out, nil
 }
 
+func (c *stakeholderClient) SetCurrentPosition(ctx context.Context, in *SetPositionRequest, opts ...grpc.CallOption) (*PositionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PositionResponse)
+	err := c.cc.Invoke(ctx, Stakeholder_SetCurrentPosition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *stakeholderClient) GetCurrentPosition(ctx context.Context, in *GetPositionRequest, opts ...grpc.CallOption) (*PositionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PositionResponse)
+	err := c.cc.Invoke(ctx, Stakeholder_GetCurrentPosition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *stakeholderClient) DeleteCurrentPosition(ctx context.Context, in *DeletePositionRequest, opts ...grpc.CallOption) (*DeletePositionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeletePositionResponse)
+	err := c.cc.Invoke(ctx, Stakeholder_DeleteCurrentPosition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // StakeholderServer is the server API for Stakeholder service.
 // All implementations must embed UnimplementedStakeholderServer
 // for forward compatibility.
@@ -117,6 +153,9 @@ type StakeholderServer interface {
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	GetAll(context.Context, *GetAllRequest) (*GetAllResponse, error)
 	BlockUser(context.Context, *BlockUserRequest) (*BlockUserResponse, error)
+	SetCurrentPosition(context.Context, *SetPositionRequest) (*PositionResponse, error)
+	GetCurrentPosition(context.Context, *GetPositionRequest) (*PositionResponse, error)
+	DeleteCurrentPosition(context.Context, *DeletePositionRequest) (*DeletePositionResponse, error)
 	mustEmbedUnimplementedStakeholderServer()
 }
 
@@ -144,6 +183,15 @@ func (UnimplementedStakeholderServer) GetAll(context.Context, *GetAllRequest) (*
 }
 func (UnimplementedStakeholderServer) BlockUser(context.Context, *BlockUserRequest) (*BlockUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BlockUser not implemented")
+}
+func (UnimplementedStakeholderServer) SetCurrentPosition(context.Context, *SetPositionRequest) (*PositionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetCurrentPosition not implemented")
+}
+func (UnimplementedStakeholderServer) GetCurrentPosition(context.Context, *GetPositionRequest) (*PositionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentPosition not implemented")
+}
+func (UnimplementedStakeholderServer) DeleteCurrentPosition(context.Context, *DeletePositionRequest) (*DeletePositionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCurrentPosition not implemented")
 }
 func (UnimplementedStakeholderServer) mustEmbedUnimplementedStakeholderServer() {}
 func (UnimplementedStakeholderServer) testEmbeddedByValue()                     {}
@@ -274,6 +322,60 @@ func _Stakeholder_BlockUser_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Stakeholder_SetCurrentPosition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPositionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StakeholderServer).SetCurrentPosition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Stakeholder_SetCurrentPosition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StakeholderServer).SetCurrentPosition(ctx, req.(*SetPositionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Stakeholder_GetCurrentPosition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPositionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StakeholderServer).GetCurrentPosition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Stakeholder_GetCurrentPosition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StakeholderServer).GetCurrentPosition(ctx, req.(*GetPositionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Stakeholder_DeleteCurrentPosition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePositionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StakeholderServer).DeleteCurrentPosition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Stakeholder_DeleteCurrentPosition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StakeholderServer).DeleteCurrentPosition(ctx, req.(*DeletePositionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Stakeholder_ServiceDesc is the grpc.ServiceDesc for Stakeholder service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -304,6 +406,18 @@ var Stakeholder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BlockUser",
 			Handler:    _Stakeholder_BlockUser_Handler,
+		},
+		{
+			MethodName: "SetCurrentPosition",
+			Handler:    _Stakeholder_SetCurrentPosition_Handler,
+		},
+		{
+			MethodName: "GetCurrentPosition",
+			Handler:    _Stakeholder_GetCurrentPosition_Handler,
+		},
+		{
+			MethodName: "DeleteCurrentPosition",
+			Handler:    _Stakeholder_DeleteCurrentPosition_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
