@@ -3,8 +3,14 @@ services:
     build: .
     ports:
       - "8000:8000"
+    volumes:
+      - shared_uploads:/app/uploads
     networks:
       - soa-network
+
+volumes:
+  shared_uploads:
+    external: true 
 
 networks:
   soa-network:

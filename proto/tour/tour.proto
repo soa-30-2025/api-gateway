@@ -188,6 +188,7 @@ service TourService {
     rpc CreateReview(CreateReviewRequest) returns (CreateReviewResponse) {
         option (google.api.http) = {
         post: "/api/review"
+        body: "*"
         };
     }
     

@@ -1884,15 +1884,15 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\vkeypoint_id\x18\x01 \x01(\tR\n" +
 	"keypointId\"(\n" +
 	"\x16DeleteKeypointResponse\x12\x0e\n" +
-	"\x02ok\x18\x01 \x01(\bR\x02ok2\xfa\t\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok2\xfd\t\n" +
 	"\vTourService\x12U\n" +
 	"\n" +
 	"CreateTour\x12\x17.tour.CreateTourRequest\x1a\x18.tour.CreateTourResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/api/tour\x12q\n" +
 	"\x10GetToursByAuthor\x12\x1d.tour.GetToursByAuthorRequest\x1a\x1e.tour.GetToursByAuthorResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/api/tours/{author_id}\x12N\n" +
 	"\aGetTour\x12\x14.tour.GetTourRequest\x1a\x15.tour.GetTourResponse\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/tour/{id}\x12V\n" +
 	"\vGetAllTours\x12\x18.tour.GetAllToursRequest\x1a\x19.tour.GetAllToursResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
-	"/api/tours\x12Z\n" +
-	"\fCreateReview\x12\x19.tour.CreateReviewRequest\x1a\x1a.tour.CreateReviewResponse\"\x13\x82\xd3\xe4\x93\x02\r\"\v/api/review\x12Z\n" +
+	"/api/tours\x12]\n" +
+	"\fCreateReview\x12\x19.tour.CreateReviewRequest\x1a\x1a.tour.CreateReviewResponse\"\x16\x82\xd3\xe4\x93\x02\x10:\x01*\"\v/api/review\x12Z\n" +
 	"\n" +
 	"UpdateTour\x12\x17.tour.UpdateTourRequest\x1a\x18.tour.UpdateTourResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\x1a\x0e/api/tour/{id}\x12p\n" +
 	"\x10GetReviewsByTour\x12\x1d.tour.GetReviewsByTourRequest\x1a\x1e.tour.GetReviewsByTourResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/reviews/{tourId}\x12l\n" +
