@@ -13,6 +13,7 @@ import (
 	"api-gateway/proto/auth"
 	"api-gateway/proto/blog"
 	"api-gateway/proto/follower"
+	"api-gateway/proto/purchase"
 	"api-gateway/proto/stakeholder"
 	"api-gateway/proto/tour"
 
@@ -52,6 +53,11 @@ func registerTour(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientC
 func registerFollower(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
 	client := follower.NewFollowerServiceClient(conn)
 	return follower.RegisterFollowerServiceHandlerClient(ctx, mux, client)
+}
+
+func registerPurchase(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	client := purchase.NewPurchaseServiceClient(conn)
+	return purchase.RegisterPurchaseServiceHandlerClient(ctx, mux, client)
 }
 
 func withCORS(h http.Handler) http.Handler {
@@ -98,6 +104,7 @@ func main() {
 		{name: "stakeholder", address: cfg.StakeHolderServiceAddress, register: registerStakeholder},
 		{name: "blog", address: cfg.BlogServiceAddress, register: registerBlog},
 		{name: "follower", address: cfg.FollowerServiceAddress, register: registerFollower},
+		{name: "purchase", address: cfg.PaymentServiceAddress, register: registerPurchase},
 	}
 
 	gwmux := runtime.NewServeMux()
@@ -110,7 +117,7 @@ func main() {
 		conn, err := dialWithRetry(ctx, s.address, 2, 1*time.Second)
 		if err != nil {
 			log.Printf("[WARN] Failed to dial %s: %v — skipping registration", s.name, err)
-			continue 
+			continue
 		}
 
 		if err := s.register(ctx, gwmux, conn); err != nil {
