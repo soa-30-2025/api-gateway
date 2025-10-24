@@ -23,7 +23,9 @@ const (
 	TourService_GetToursByAuthor_FullMethodName = "/tour.TourService/GetToursByAuthor"
 	TourService_GetTour_FullMethodName          = "/tour.TourService/GetTour"
 	TourService_GetAllTours_FullMethodName      = "/tour.TourService/GetAllTours"
+	TourService_CreateReview_FullMethodName     = "/tour.TourService/CreateReview"
 	TourService_UpdateTour_FullMethodName       = "/tour.TourService/UpdateTour"
+	TourService_GetReviewsByTour_FullMethodName = "/tour.TourService/GetReviewsByTour"
 	TourService_AddKeypoint_FullMethodName      = "/tour.TourService/AddKeypoint"
 	TourService_GetKeypointImage_FullMethodName = "/tour.TourService/GetKeypointImage"
 	TourService_ReorderKeypoints_FullMethodName = "/tour.TourService/ReorderKeypoints"
@@ -39,7 +41,9 @@ type TourServiceClient interface {
 	GetToursByAuthor(ctx context.Context, in *GetToursByAuthorRequest, opts ...grpc.CallOption) (*GetToursByAuthorResponse, error)
 	GetTour(ctx context.Context, in *GetTourRequest, opts ...grpc.CallOption) (*GetTourResponse, error)
 	GetAllTours(ctx context.Context, in *GetAllToursRequest, opts ...grpc.CallOption) (*GetAllToursResponse, error)
+	CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...grpc.CallOption) (*CreateReviewResponse, error)
 	UpdateTour(ctx context.Context, in *UpdateTourRequest, opts ...grpc.CallOption) (*UpdateTourResponse, error)
+	GetReviewsByTour(ctx context.Context, in *GetReviewsByTourRequest, opts ...grpc.CallOption) (*GetReviewsByTourResponse, error)
 	AddKeypoint(ctx context.Context, in *AddKeypointRequest, opts ...grpc.CallOption) (*AddKeypointResponse, error)
 	GetKeypointImage(ctx context.Context, in *GetKeypointImageRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ImageChunk], error)
 	ReorderKeypoints(ctx context.Context, in *ReorderKeypointsRequest, opts ...grpc.CallOption) (*ReorderKeypointsResponse, error)
@@ -95,10 +99,30 @@ func (c *tourServiceClient) GetAllTours(ctx context.Context, in *GetAllToursRequ
 	return out, nil
 }
 
+func (c *tourServiceClient) CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...grpc.CallOption) (*CreateReviewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateReviewResponse)
+	err := c.cc.Invoke(ctx, TourService_CreateReview_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *tourServiceClient) UpdateTour(ctx context.Context, in *UpdateTourRequest, opts ...grpc.CallOption) (*UpdateTourResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateTourResponse)
 	err := c.cc.Invoke(ctx, TourService_UpdateTour_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tourServiceClient) GetReviewsByTour(ctx context.Context, in *GetReviewsByTourRequest, opts ...grpc.CallOption) (*GetReviewsByTourResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetReviewsByTourResponse)
+	err := c.cc.Invoke(ctx, TourService_GetReviewsByTour_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -172,7 +196,9 @@ type TourServiceServer interface {
 	GetToursByAuthor(context.Context, *GetToursByAuthorRequest) (*GetToursByAuthorResponse, error)
 	GetTour(context.Context, *GetTourRequest) (*GetTourResponse, error)
 	GetAllTours(context.Context, *GetAllToursRequest) (*GetAllToursResponse, error)
+	CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewResponse, error)
 	UpdateTour(context.Context, *UpdateTourRequest) (*UpdateTourResponse, error)
+	GetReviewsByTour(context.Context, *GetReviewsByTourRequest) (*GetReviewsByTourResponse, error)
 	AddKeypoint(context.Context, *AddKeypointRequest) (*AddKeypointResponse, error)
 	GetKeypointImage(*GetKeypointImageRequest, grpc.ServerStreamingServer[ImageChunk]) error
 	ReorderKeypoints(context.Context, *ReorderKeypointsRequest) (*ReorderKeypointsResponse, error)
@@ -200,8 +226,14 @@ func (UnimplementedTourServiceServer) GetTour(context.Context, *GetTourRequest) 
 func (UnimplementedTourServiceServer) GetAllTours(context.Context, *GetAllToursRequest) (*GetAllToursResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllTours not implemented")
 }
+func (UnimplementedTourServiceServer) CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateReview not implemented")
+}
 func (UnimplementedTourServiceServer) UpdateTour(context.Context, *UpdateTourRequest) (*UpdateTourResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTour not implemented")
+}
+func (UnimplementedTourServiceServer) GetReviewsByTour(context.Context, *GetReviewsByTourRequest) (*GetReviewsByTourResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetReviewsByTour not implemented")
 }
 func (UnimplementedTourServiceServer) AddKeypoint(context.Context, *AddKeypointRequest) (*AddKeypointResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddKeypoint not implemented")
@@ -311,6 +343,24 @@ func _TourService_GetAllTours_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TourService_CreateReview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateReviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).CreateReview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_CreateReview_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).CreateReview(ctx, req.(*CreateReviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TourService_UpdateTour_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateTourRequest)
 	if err := dec(in); err != nil {
@@ -325,6 +375,24 @@ func _TourService_UpdateTour_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TourServiceServer).UpdateTour(ctx, req.(*UpdateTourRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TourService_GetReviewsByTour_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetReviewsByTourRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).GetReviewsByTour(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_GetReviewsByTour_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).GetReviewsByTour(ctx, req.(*GetReviewsByTourRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -436,8 +504,16 @@ var TourService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TourService_GetAllTours_Handler,
 		},
 		{
+			MethodName: "CreateReview",
+			Handler:    _TourService_CreateReview_Handler,
+		},
+		{
 			MethodName: "UpdateTour",
 			Handler:    _TourService_UpdateTour_Handler,
+		},
+		{
+			MethodName: "GetReviewsByTour",
+			Handler:    _TourService_GetReviewsByTour_Handler,
 		},
 		{
 			MethodName: "AddKeypoint",

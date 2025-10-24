@@ -107,7 +107,7 @@ func main() {
 
 	for _, s := range svcs {
 		log.Printf("Dialing %s -> %s", s.name, s.address)
-		conn, err := dialWithRetry(ctx, s.address, 5, 2*time.Second)
+		conn, err := dialWithRetry(ctx, s.address, 2, 1*time.Second)
 		if err != nil {
 			log.Printf("[WARN] Failed to dial %s: %v — skipping registration", s.name, err)
 			continue 
@@ -123,16 +123,20 @@ func main() {
 		log.Printf("Registered %s", s.name)
 	}
 
+	// JWT middleware
 	jwtMid := middleware.NewJWTMiddlewareFromEnv()
-
 	jwtMid.AllowUnauthenticated = true
 	jwtMid.RequireAuthForAll = false
 
-	handler := jwtMid.Middleware(withCORS(gwmux))
+	mux := http.NewServeMux()
+	mux.Handle("/", jwtMid.Middleware(withCORS(gwmux)))
+
+	fs := http.FileServer(http.Dir("/app/uploads"))  
+	mux.Handle("/uploads/", http.StripPrefix("/uploads/", fs))
 
 	gwServer := &http.Server{
 		Addr:    cfg.Address,
-		Handler: handler,
+		Handler: mux,
 	}
 
 	go func() {
