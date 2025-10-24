@@ -131,21 +131,13 @@ func main() {
 	mux := http.NewServeMux()
 	mux.Handle("/", jwtMid.Middleware(withCORS(gwmux)))
 
-	// Static file server
-	// API Gateway servira fajlove iz foldera koji deli volumene sa tour-service
-	fs := http.FileServer(http.Dir("/app/uploads"))  // ovo je path unutar kontejnera
+	fs := http.FileServer(http.Dir("/app/uploads"))  
 	mux.Handle("/uploads/", http.StripPrefix("/uploads/", fs))
 
-
-	// Glavni router
-
-
-	// HTTP server
 	gwServer := &http.Server{
 		Addr:    cfg.Address,
 		Handler: mux,
 	}
-
 
 	go func() {
 		log.Printf("Gateway listening on %s", cfg.Address)
