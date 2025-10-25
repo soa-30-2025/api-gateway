@@ -18,9 +18,10 @@ message Tour {
   string status = 9;
   map<string,int32> travel_times = 10;
   google.protobuf.Timestamp created_at = 11;
-  string updated_at = 12;
-  string published_at = 13;
-  string archived_at = 14;
+  google.protobuf.Timestamp departure_date = 12;
+  string updated_at = 13;
+  string published_at = 14;
+  string archived_at = 15;
 }
 
 message Keypoint {
@@ -53,6 +54,8 @@ message CreateTourRequest {
     string difficulty = 3;
     repeated string tags = 4;
     map<string,int32> travel_times = 5;
+    double price = 6;
+    google.protobuf.Timestamp departure_date = 7;
 }
 
 message CreateTourResponse {
@@ -111,6 +114,8 @@ message UpdateTourRequest {
   map<string,int32> travel_times = 6;
   double length_km = 7;
   string status = 8;
+  double price = 9;
+  google.protobuf.Timestamp departure_date = 10;
 }
 message UpdateTourResponse { Tour tour = 1; }
 
