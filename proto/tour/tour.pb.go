@@ -387,6 +387,462 @@ func (x *Review) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+type TourExecution struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Id                 string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	TourId             string                 `protobuf:"bytes,2,opt,name=tour_id,json=tourId,proto3" json:"tour_id,omitempty"`
+	TouristId          string                 `protobuf:"bytes,3,opt,name=tourist_id,json=touristId,proto3" json:"tourist_id,omitempty"`
+	Status             string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	CompletedKeyPoints []*CompletedKeyPoint   `protobuf:"bytes,5,rep,name=completed_key_points,json=completedKeyPoints,proto3" json:"completed_key_points,omitempty"`
+	StartTime          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime            *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	LastActivity       *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=last_activity,json=lastActivity,proto3" json:"last_activity,omitempty"`
+	Lat                float64                `protobuf:"fixed64,9,opt,name=lat,proto3" json:"lat,omitempty"`
+	Lng                float64                `protobuf:"fixed64,10,opt,name=lng,proto3" json:"lng,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *TourExecution) Reset() {
+	*x = TourExecution{}
+	mi := &file_tour_tour_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TourExecution) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TourExecution) ProtoMessage() {}
+
+func (x *TourExecution) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TourExecution.ProtoReflect.Descriptor instead.
+func (*TourExecution) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TourExecution) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *TourExecution) GetTourId() string {
+	if x != nil {
+		return x.TourId
+	}
+	return ""
+}
+
+func (x *TourExecution) GetTouristId() string {
+	if x != nil {
+		return x.TouristId
+	}
+	return ""
+}
+
+func (x *TourExecution) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *TourExecution) GetCompletedKeyPoints() []*CompletedKeyPoint {
+	if x != nil {
+		return x.CompletedKeyPoints
+	}
+	return nil
+}
+
+func (x *TourExecution) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *TourExecution) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *TourExecution) GetLastActivity() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastActivity
+	}
+	return nil
+}
+
+func (x *TourExecution) GetLat() float64 {
+	if x != nil {
+		return x.Lat
+	}
+	return 0
+}
+
+func (x *TourExecution) GetLng() float64 {
+	if x != nil {
+		return x.Lng
+	}
+	return 0
+}
+
+type CompletedKeyPoint struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	KeyPointId    string                 `protobuf:"bytes,1,opt,name=key_point_id,json=keyPointId,proto3" json:"key_point_id,omitempty"`
+	CompletedTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=completed_time,json=completedTime,proto3" json:"completed_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CompletedKeyPoint) Reset() {
+	*x = CompletedKeyPoint{}
+	mi := &file_tour_tour_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CompletedKeyPoint) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CompletedKeyPoint) ProtoMessage() {}
+
+func (x *CompletedKeyPoint) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CompletedKeyPoint.ProtoReflect.Descriptor instead.
+func (*CompletedKeyPoint) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CompletedKeyPoint) GetKeyPointId() string {
+	if x != nil {
+		return x.KeyPointId
+	}
+	return ""
+}
+
+func (x *CompletedKeyPoint) GetCompletedTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CompletedTime
+	}
+	return nil
+}
+
+type StartTourRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TourId        string                 `protobuf:"bytes,1,opt,name=tour_id,json=tourId,proto3" json:"tour_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartTourRequest) Reset() {
+	*x = StartTourRequest{}
+	mi := &file_tour_tour_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartTourRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartTourRequest) ProtoMessage() {}
+
+func (x *StartTourRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartTourRequest.ProtoReflect.Descriptor instead.
+func (*StartTourRequest) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *StartTourRequest) GetTourId() string {
+	if x != nil {
+		return x.TourId
+	}
+	return ""
+}
+
+type StartTourResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Execution     *TourExecution         `protobuf:"bytes,1,opt,name=execution,proto3" json:"execution,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartTourResponse) Reset() {
+	*x = StartTourResponse{}
+	mi := &file_tour_tour_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartTourResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartTourResponse) ProtoMessage() {}
+
+func (x *StartTourResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartTourResponse.ProtoReflect.Descriptor instead.
+func (*StartTourResponse) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *StartTourResponse) GetExecution() *TourExecution {
+	if x != nil {
+		return x.Execution
+	}
+	return nil
+}
+
+type UpdateTourExecutionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ExecutionId   string                 `protobuf:"bytes,1,opt,name=execution_id,json=executionId,proto3" json:"execution_id,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Lat           float64                `protobuf:"fixed64,3,opt,name=lat,proto3" json:"lat,omitempty"`
+	Lng           float64                `protobuf:"fixed64,4,opt,name=lng,proto3" json:"lng,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTourExecutionRequest) Reset() {
+	*x = UpdateTourExecutionRequest{}
+	mi := &file_tour_tour_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTourExecutionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTourExecutionRequest) ProtoMessage() {}
+
+func (x *UpdateTourExecutionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTourExecutionRequest.ProtoReflect.Descriptor instead.
+func (*UpdateTourExecutionRequest) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *UpdateTourExecutionRequest) GetExecutionId() string {
+	if x != nil {
+		return x.ExecutionId
+	}
+	return ""
+}
+
+func (x *UpdateTourExecutionRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *UpdateTourExecutionRequest) GetLat() float64 {
+	if x != nil {
+		return x.Lat
+	}
+	return 0
+}
+
+func (x *UpdateTourExecutionRequest) GetLng() float64 {
+	if x != nil {
+		return x.Lng
+	}
+	return 0
+}
+
+type UpdateTourExecutionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Execution     *TourExecution         `protobuf:"bytes,1,opt,name=execution,proto3" json:"execution,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTourExecutionResponse) Reset() {
+	*x = UpdateTourExecutionResponse{}
+	mi := &file_tour_tour_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTourExecutionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTourExecutionResponse) ProtoMessage() {}
+
+func (x *UpdateTourExecutionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTourExecutionResponse.ProtoReflect.Descriptor instead.
+func (*UpdateTourExecutionResponse) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *UpdateTourExecutionResponse) GetExecution() *TourExecution {
+	if x != nil {
+		return x.Execution
+	}
+	return nil
+}
+
+type CheckKeypointProximityRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ExecutionId   string                 `protobuf:"bytes,1,opt,name=execution_id,json=executionId,proto3" json:"execution_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckKeypointProximityRequest) Reset() {
+	*x = CheckKeypointProximityRequest{}
+	mi := &file_tour_tour_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckKeypointProximityRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckKeypointProximityRequest) ProtoMessage() {}
+
+func (x *CheckKeypointProximityRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckKeypointProximityRequest.ProtoReflect.Descriptor instead.
+func (*CheckKeypointProximityRequest) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *CheckKeypointProximityRequest) GetExecutionId() string {
+	if x != nil {
+		return x.ExecutionId
+	}
+	return ""
+}
+
+type CheckKeypointProximityResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	IsNearKeypoint bool                   `protobuf:"varint,1,opt,name=is_near_keypoint,json=isNearKeypoint,proto3" json:"is_near_keypoint,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CheckKeypointProximityResponse) Reset() {
+	*x = CheckKeypointProximityResponse{}
+	mi := &file_tour_tour_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckKeypointProximityResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckKeypointProximityResponse) ProtoMessage() {}
+
+func (x *CheckKeypointProximityResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckKeypointProximityResponse.ProtoReflect.Descriptor instead.
+func (*CheckKeypointProximityResponse) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CheckKeypointProximityResponse) GetIsNearKeypoint() bool {
+	if x != nil {
+		return x.IsNearKeypoint
+	}
+	return false
+}
+
 type CreateTourRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -400,7 +856,7 @@ type CreateTourRequest struct {
 
 func (x *CreateTourRequest) Reset() {
 	*x = CreateTourRequest{}
-	mi := &file_tour_tour_proto_msgTypes[3]
+	mi := &file_tour_tour_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -412,7 +868,7 @@ func (x *CreateTourRequest) String() string {
 func (*CreateTourRequest) ProtoMessage() {}
 
 func (x *CreateTourRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[3]
+	mi := &file_tour_tour_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -425,7 +881,7 @@ func (x *CreateTourRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTourRequest.ProtoReflect.Descriptor instead.
 func (*CreateTourRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{3}
+	return file_tour_tour_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *CreateTourRequest) GetName() string {
@@ -472,7 +928,7 @@ type CreateTourResponse struct {
 
 func (x *CreateTourResponse) Reset() {
 	*x = CreateTourResponse{}
-	mi := &file_tour_tour_proto_msgTypes[4]
+	mi := &file_tour_tour_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -484,7 +940,7 @@ func (x *CreateTourResponse) String() string {
 func (*CreateTourResponse) ProtoMessage() {}
 
 func (x *CreateTourResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[4]
+	mi := &file_tour_tour_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -497,7 +953,7 @@ func (x *CreateTourResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTourResponse.ProtoReflect.Descriptor instead.
 func (*CreateTourResponse) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{4}
+	return file_tour_tour_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CreateTourResponse) GetTour() *Tour {
@@ -516,7 +972,7 @@ type GetToursByAuthorRequest struct {
 
 func (x *GetToursByAuthorRequest) Reset() {
 	*x = GetToursByAuthorRequest{}
-	mi := &file_tour_tour_proto_msgTypes[5]
+	mi := &file_tour_tour_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -528,7 +984,7 @@ func (x *GetToursByAuthorRequest) String() string {
 func (*GetToursByAuthorRequest) ProtoMessage() {}
 
 func (x *GetToursByAuthorRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[5]
+	mi := &file_tour_tour_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -541,7 +997,7 @@ func (x *GetToursByAuthorRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetToursByAuthorRequest.ProtoReflect.Descriptor instead.
 func (*GetToursByAuthorRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{5}
+	return file_tour_tour_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetToursByAuthorRequest) GetAuthorId() string {
@@ -560,7 +1016,7 @@ type GetToursByAuthorResponse struct {
 
 func (x *GetToursByAuthorResponse) Reset() {
 	*x = GetToursByAuthorResponse{}
-	mi := &file_tour_tour_proto_msgTypes[6]
+	mi := &file_tour_tour_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -572,7 +1028,7 @@ func (x *GetToursByAuthorResponse) String() string {
 func (*GetToursByAuthorResponse) ProtoMessage() {}
 
 func (x *GetToursByAuthorResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[6]
+	mi := &file_tour_tour_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -585,7 +1041,7 @@ func (x *GetToursByAuthorResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetToursByAuthorResponse.ProtoReflect.Descriptor instead.
 func (*GetToursByAuthorResponse) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{6}
+	return file_tour_tour_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetToursByAuthorResponse) GetTours() []*Tour {
@@ -604,7 +1060,7 @@ type GetTourRequest struct {
 
 func (x *GetTourRequest) Reset() {
 	*x = GetTourRequest{}
-	mi := &file_tour_tour_proto_msgTypes[7]
+	mi := &file_tour_tour_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -616,7 +1072,7 @@ func (x *GetTourRequest) String() string {
 func (*GetTourRequest) ProtoMessage() {}
 
 func (x *GetTourRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[7]
+	mi := &file_tour_tour_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -629,7 +1085,7 @@ func (x *GetTourRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTourRequest.ProtoReflect.Descriptor instead.
 func (*GetTourRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{7}
+	return file_tour_tour_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetTourRequest) GetId() string {
@@ -649,7 +1105,7 @@ type GetTourResponse struct {
 
 func (x *GetTourResponse) Reset() {
 	*x = GetTourResponse{}
-	mi := &file_tour_tour_proto_msgTypes[8]
+	mi := &file_tour_tour_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -661,7 +1117,7 @@ func (x *GetTourResponse) String() string {
 func (*GetTourResponse) ProtoMessage() {}
 
 func (x *GetTourResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[8]
+	mi := &file_tour_tour_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -674,7 +1130,7 @@ func (x *GetTourResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTourResponse.ProtoReflect.Descriptor instead.
 func (*GetTourResponse) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{8}
+	return file_tour_tour_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetTourResponse) GetTour() *Tour {
@@ -699,7 +1155,7 @@ type GetAllToursRequest struct {
 
 func (x *GetAllToursRequest) Reset() {
 	*x = GetAllToursRequest{}
-	mi := &file_tour_tour_proto_msgTypes[9]
+	mi := &file_tour_tour_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -711,7 +1167,7 @@ func (x *GetAllToursRequest) String() string {
 func (*GetAllToursRequest) ProtoMessage() {}
 
 func (x *GetAllToursRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[9]
+	mi := &file_tour_tour_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -724,7 +1180,7 @@ func (x *GetAllToursRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllToursRequest.ProtoReflect.Descriptor instead.
 func (*GetAllToursRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{9}
+	return file_tour_tour_proto_rawDescGZIP(), []int{17}
 }
 
 type GetAllToursResponse struct {
@@ -736,7 +1192,7 @@ type GetAllToursResponse struct {
 
 func (x *GetAllToursResponse) Reset() {
 	*x = GetAllToursResponse{}
-	mi := &file_tour_tour_proto_msgTypes[10]
+	mi := &file_tour_tour_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -748,7 +1204,7 @@ func (x *GetAllToursResponse) String() string {
 func (*GetAllToursResponse) ProtoMessage() {}
 
 func (x *GetAllToursResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[10]
+	mi := &file_tour_tour_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -761,7 +1217,7 @@ func (x *GetAllToursResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllToursResponse.ProtoReflect.Descriptor instead.
 func (*GetAllToursResponse) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{10}
+	return file_tour_tour_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetAllToursResponse) GetTours() []*Tour {
@@ -784,7 +1240,7 @@ type CreateReviewRequest struct {
 
 func (x *CreateReviewRequest) Reset() {
 	*x = CreateReviewRequest{}
-	mi := &file_tour_tour_proto_msgTypes[11]
+	mi := &file_tour_tour_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -796,7 +1252,7 @@ func (x *CreateReviewRequest) String() string {
 func (*CreateReviewRequest) ProtoMessage() {}
 
 func (x *CreateReviewRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[11]
+	mi := &file_tour_tour_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -809,7 +1265,7 @@ func (x *CreateReviewRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateReviewRequest.ProtoReflect.Descriptor instead.
 func (*CreateReviewRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{11}
+	return file_tour_tour_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CreateReviewRequest) GetTourId() string {
@@ -858,7 +1314,7 @@ type Image struct {
 
 func (x *Image) Reset() {
 	*x = Image{}
-	mi := &file_tour_tour_proto_msgTypes[12]
+	mi := &file_tour_tour_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -870,7 +1326,7 @@ func (x *Image) String() string {
 func (*Image) ProtoMessage() {}
 
 func (x *Image) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[12]
+	mi := &file_tour_tour_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -883,7 +1339,7 @@ func (x *Image) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Image.ProtoReflect.Descriptor instead.
 func (*Image) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{12}
+	return file_tour_tour_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *Image) GetData() []byte {
@@ -916,7 +1372,7 @@ type CreateReviewResponse struct {
 
 func (x *CreateReviewResponse) Reset() {
 	*x = CreateReviewResponse{}
-	mi := &file_tour_tour_proto_msgTypes[13]
+	mi := &file_tour_tour_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -928,7 +1384,7 @@ func (x *CreateReviewResponse) String() string {
 func (*CreateReviewResponse) ProtoMessage() {}
 
 func (x *CreateReviewResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[13]
+	mi := &file_tour_tour_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -941,7 +1397,7 @@ func (x *CreateReviewResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateReviewResponse.ProtoReflect.Descriptor instead.
 func (*CreateReviewResponse) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{13}
+	return file_tour_tour_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *CreateReviewResponse) GetReview() *Review {
@@ -960,7 +1416,7 @@ type GetReviewsByTourRequest struct {
 
 func (x *GetReviewsByTourRequest) Reset() {
 	*x = GetReviewsByTourRequest{}
-	mi := &file_tour_tour_proto_msgTypes[14]
+	mi := &file_tour_tour_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -972,7 +1428,7 @@ func (x *GetReviewsByTourRequest) String() string {
 func (*GetReviewsByTourRequest) ProtoMessage() {}
 
 func (x *GetReviewsByTourRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[14]
+	mi := &file_tour_tour_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -985,7 +1441,7 @@ func (x *GetReviewsByTourRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetReviewsByTourRequest.ProtoReflect.Descriptor instead.
 func (*GetReviewsByTourRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{14}
+	return file_tour_tour_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetReviewsByTourRequest) GetTourId() string {
@@ -1004,7 +1460,7 @@ type GetReviewsByTourResponse struct {
 
 func (x *GetReviewsByTourResponse) Reset() {
 	*x = GetReviewsByTourResponse{}
-	mi := &file_tour_tour_proto_msgTypes[15]
+	mi := &file_tour_tour_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1016,7 +1472,7 @@ func (x *GetReviewsByTourResponse) String() string {
 func (*GetReviewsByTourResponse) ProtoMessage() {}
 
 func (x *GetReviewsByTourResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[15]
+	mi := &file_tour_tour_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1029,7 +1485,7 @@ func (x *GetReviewsByTourResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetReviewsByTourResponse.ProtoReflect.Descriptor instead.
 func (*GetReviewsByTourResponse) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{15}
+	return file_tour_tour_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetReviewsByTourResponse) GetReviews() []*Review {
@@ -1055,7 +1511,7 @@ type UpdateTourRequest struct {
 
 func (x *UpdateTourRequest) Reset() {
 	*x = UpdateTourRequest{}
-	mi := &file_tour_tour_proto_msgTypes[16]
+	mi := &file_tour_tour_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1067,7 +1523,7 @@ func (x *UpdateTourRequest) String() string {
 func (*UpdateTourRequest) ProtoMessage() {}
 
 func (x *UpdateTourRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[16]
+	mi := &file_tour_tour_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1080,7 +1536,7 @@ func (x *UpdateTourRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTourRequest.ProtoReflect.Descriptor instead.
 func (*UpdateTourRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{16}
+	return file_tour_tour_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *UpdateTourRequest) GetId() string {
@@ -1148,7 +1604,7 @@ type UpdateTourResponse struct {
 
 func (x *UpdateTourResponse) Reset() {
 	*x = UpdateTourResponse{}
-	mi := &file_tour_tour_proto_msgTypes[17]
+	mi := &file_tour_tour_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1160,7 +1616,7 @@ func (x *UpdateTourResponse) String() string {
 func (*UpdateTourResponse) ProtoMessage() {}
 
 func (x *UpdateTourResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[17]
+	mi := &file_tour_tour_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1173,7 +1629,7 @@ func (x *UpdateTourResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTourResponse.ProtoReflect.Descriptor instead.
 func (*UpdateTourResponse) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{17}
+	return file_tour_tour_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *UpdateTourResponse) GetTour() *Tour {
@@ -1200,7 +1656,7 @@ type AddKeypointRequest struct {
 
 func (x *AddKeypointRequest) Reset() {
 	*x = AddKeypointRequest{}
-	mi := &file_tour_tour_proto_msgTypes[18]
+	mi := &file_tour_tour_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1212,7 +1668,7 @@ func (x *AddKeypointRequest) String() string {
 func (*AddKeypointRequest) ProtoMessage() {}
 
 func (x *AddKeypointRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[18]
+	mi := &file_tour_tour_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1225,7 +1681,7 @@ func (x *AddKeypointRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddKeypointRequest.ProtoReflect.Descriptor instead.
 func (*AddKeypointRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{18}
+	return file_tour_tour_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *AddKeypointRequest) GetTourId() string {
@@ -1300,7 +1756,7 @@ type AddKeypointResponse struct {
 
 func (x *AddKeypointResponse) Reset() {
 	*x = AddKeypointResponse{}
-	mi := &file_tour_tour_proto_msgTypes[19]
+	mi := &file_tour_tour_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1312,7 +1768,7 @@ func (x *AddKeypointResponse) String() string {
 func (*AddKeypointResponse) ProtoMessage() {}
 
 func (x *AddKeypointResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[19]
+	mi := &file_tour_tour_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1325,7 +1781,7 @@ func (x *AddKeypointResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddKeypointResponse.ProtoReflect.Descriptor instead.
 func (*AddKeypointResponse) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{19}
+	return file_tour_tour_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *AddKeypointResponse) GetKeypoint() *Keypoint {
@@ -1344,7 +1800,7 @@ type GetKeypointImageRequest struct {
 
 func (x *GetKeypointImageRequest) Reset() {
 	*x = GetKeypointImageRequest{}
-	mi := &file_tour_tour_proto_msgTypes[20]
+	mi := &file_tour_tour_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1356,7 +1812,7 @@ func (x *GetKeypointImageRequest) String() string {
 func (*GetKeypointImageRequest) ProtoMessage() {}
 
 func (x *GetKeypointImageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[20]
+	mi := &file_tour_tour_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1369,7 +1825,7 @@ func (x *GetKeypointImageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKeypointImageRequest.ProtoReflect.Descriptor instead.
 func (*GetKeypointImageRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{20}
+	return file_tour_tour_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetKeypointImageRequest) GetKeypointId() string {
@@ -1388,7 +1844,7 @@ type ImageChunk struct {
 
 func (x *ImageChunk) Reset() {
 	*x = ImageChunk{}
-	mi := &file_tour_tour_proto_msgTypes[21]
+	mi := &file_tour_tour_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1400,7 +1856,7 @@ func (x *ImageChunk) String() string {
 func (*ImageChunk) ProtoMessage() {}
 
 func (x *ImageChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[21]
+	mi := &file_tour_tour_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1413,7 +1869,7 @@ func (x *ImageChunk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ImageChunk.ProtoReflect.Descriptor instead.
 func (*ImageChunk) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{21}
+	return file_tour_tour_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ImageChunk) GetData() []byte {
@@ -1433,7 +1889,7 @@ type ReorderKeypointsRequest struct {
 
 func (x *ReorderKeypointsRequest) Reset() {
 	*x = ReorderKeypointsRequest{}
-	mi := &file_tour_tour_proto_msgTypes[22]
+	mi := &file_tour_tour_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1445,7 +1901,7 @@ func (x *ReorderKeypointsRequest) String() string {
 func (*ReorderKeypointsRequest) ProtoMessage() {}
 
 func (x *ReorderKeypointsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[22]
+	mi := &file_tour_tour_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1458,7 +1914,7 @@ func (x *ReorderKeypointsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReorderKeypointsRequest.ProtoReflect.Descriptor instead.
 func (*ReorderKeypointsRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{22}
+	return file_tour_tour_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ReorderKeypointsRequest) GetTourId() string {
@@ -1484,7 +1940,7 @@ type ReorderKeypointsResponse struct {
 
 func (x *ReorderKeypointsResponse) Reset() {
 	*x = ReorderKeypointsResponse{}
-	mi := &file_tour_tour_proto_msgTypes[23]
+	mi := &file_tour_tour_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1496,7 +1952,7 @@ func (x *ReorderKeypointsResponse) String() string {
 func (*ReorderKeypointsResponse) ProtoMessage() {}
 
 func (x *ReorderKeypointsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[23]
+	mi := &file_tour_tour_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1509,7 +1965,7 @@ func (x *ReorderKeypointsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReorderKeypointsResponse.ProtoReflect.Descriptor instead.
 func (*ReorderKeypointsResponse) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{23}
+	return file_tour_tour_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *ReorderKeypointsResponse) GetOk() bool {
@@ -1532,7 +1988,7 @@ type UpdateKeypointRequest struct {
 
 func (x *UpdateKeypointRequest) Reset() {
 	*x = UpdateKeypointRequest{}
-	mi := &file_tour_tour_proto_msgTypes[24]
+	mi := &file_tour_tour_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1544,7 +2000,7 @@ func (x *UpdateKeypointRequest) String() string {
 func (*UpdateKeypointRequest) ProtoMessage() {}
 
 func (x *UpdateKeypointRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[24]
+	mi := &file_tour_tour_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1557,7 +2013,7 @@ func (x *UpdateKeypointRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateKeypointRequest.ProtoReflect.Descriptor instead.
 func (*UpdateKeypointRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{24}
+	return file_tour_tour_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *UpdateKeypointRequest) GetKeypointId() string {
@@ -1604,7 +2060,7 @@ type UpdateKeypointResponse struct {
 
 func (x *UpdateKeypointResponse) Reset() {
 	*x = UpdateKeypointResponse{}
-	mi := &file_tour_tour_proto_msgTypes[25]
+	mi := &file_tour_tour_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1616,7 +2072,7 @@ func (x *UpdateKeypointResponse) String() string {
 func (*UpdateKeypointResponse) ProtoMessage() {}
 
 func (x *UpdateKeypointResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[25]
+	mi := &file_tour_tour_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1629,7 +2085,7 @@ func (x *UpdateKeypointResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateKeypointResponse.ProtoReflect.Descriptor instead.
 func (*UpdateKeypointResponse) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{25}
+	return file_tour_tour_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *UpdateKeypointResponse) GetKeypoint() *Keypoint {
@@ -1648,7 +2104,7 @@ type DeleteKeypointRequest struct {
 
 func (x *DeleteKeypointRequest) Reset() {
 	*x = DeleteKeypointRequest{}
-	mi := &file_tour_tour_proto_msgTypes[26]
+	mi := &file_tour_tour_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1660,7 +2116,7 @@ func (x *DeleteKeypointRequest) String() string {
 func (*DeleteKeypointRequest) ProtoMessage() {}
 
 func (x *DeleteKeypointRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[26]
+	mi := &file_tour_tour_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1673,7 +2129,7 @@ func (x *DeleteKeypointRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteKeypointRequest.ProtoReflect.Descriptor instead.
 func (*DeleteKeypointRequest) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{26}
+	return file_tour_tour_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *DeleteKeypointRequest) GetKeypointId() string {
@@ -1692,7 +2148,7 @@ type DeleteKeypointResponse struct {
 
 func (x *DeleteKeypointResponse) Reset() {
 	*x = DeleteKeypointResponse{}
-	mi := &file_tour_tour_proto_msgTypes[27]
+	mi := &file_tour_tour_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1704,7 +2160,7 @@ func (x *DeleteKeypointResponse) String() string {
 func (*DeleteKeypointResponse) ProtoMessage() {}
 
 func (x *DeleteKeypointResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tour_tour_proto_msgTypes[27]
+	mi := &file_tour_tour_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1717,7 +2173,7 @@ func (x *DeleteKeypointResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteKeypointResponse.ProtoReflect.Descriptor instead.
 func (*DeleteKeypointResponse) Descriptor() ([]byte, []int) {
-	return file_tour_tour_proto_rawDescGZIP(), []int{27}
+	return file_tour_tour_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *DeleteKeypointResponse) GetOk() bool {
@@ -1725,6 +2181,118 @@ func (x *DeleteKeypointResponse) GetOk() bool {
 		return x.Ok
 	}
 	return false
+}
+
+type GetCompletionStatusRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ExecutionId   string                 `protobuf:"bytes,1,opt,name=execution_id,json=executionId,proto3" json:"execution_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetCompletionStatusRequest) Reset() {
+	*x = GetCompletionStatusRequest{}
+	mi := &file_tour_tour_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCompletionStatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCompletionStatusRequest) ProtoMessage() {}
+
+func (x *GetCompletionStatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCompletionStatusRequest.ProtoReflect.Descriptor instead.
+func (*GetCompletionStatusRequest) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *GetCompletionStatusRequest) GetExecutionId() string {
+	if x != nil {
+		return x.ExecutionId
+	}
+	return ""
+}
+
+type GetCompletionStatusResponse struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	CompletedKeypoints int32                  `protobuf:"varint,1,opt,name=completed_keypoints,json=completedKeypoints,proto3" json:"completed_keypoints,omitempty"`
+	TotalKeypoints     int32                  `protobuf:"varint,2,opt,name=total_keypoints,json=totalKeypoints,proto3" json:"total_keypoints,omitempty"`
+	AllCompleted       bool                   `protobuf:"varint,3,opt,name=all_completed,json=allCompleted,proto3" json:"all_completed,omitempty"`
+	Progress           string                 `protobuf:"bytes,4,opt,name=progress,proto3" json:"progress,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *GetCompletionStatusResponse) Reset() {
+	*x = GetCompletionStatusResponse{}
+	mi := &file_tour_tour_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCompletionStatusResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCompletionStatusResponse) ProtoMessage() {}
+
+func (x *GetCompletionStatusResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCompletionStatusResponse.ProtoReflect.Descriptor instead.
+func (*GetCompletionStatusResponse) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *GetCompletionStatusResponse) GetCompletedKeypoints() int32 {
+	if x != nil {
+		return x.CompletedKeypoints
+	}
+	return 0
+}
+
+func (x *GetCompletionStatusResponse) GetTotalKeypoints() int32 {
+	if x != nil {
+		return x.TotalKeypoints
+	}
+	return 0
+}
+
+func (x *GetCompletionStatusResponse) GetAllCompleted() bool {
+	if x != nil {
+		return x.AllCompleted
+	}
+	return false
+}
+
+func (x *GetCompletionStatusResponse) GetProgress() string {
+	if x != nil {
+		return x.Progress
+	}
+	return ""
 }
 
 var File_tour_tour_proto protoreflect.FileDescriptor
@@ -1783,7 +2351,40 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\n" +
 	"image_urls\x18\a \x03(\tR\timageUrls\x129\n" +
 	"\n" +
-	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x8a\x02\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x91\x03\n" +
+	"\rTourExecution\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
+	"\atour_id\x18\x02 \x01(\tR\x06tourId\x12\x1d\n" +
+	"\n" +
+	"tourist_id\x18\x03 \x01(\tR\ttouristId\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12I\n" +
+	"\x14completed_key_points\x18\x05 \x03(\v2\x17.tour.CompletedKeyPointR\x12completedKeyPoints\x129\n" +
+	"\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12?\n" +
+	"\rlast_activity\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\flastActivity\x12\x10\n" +
+	"\x03lat\x18\t \x01(\x01R\x03lat\x12\x10\n" +
+	"\x03lng\x18\n" +
+	" \x01(\x01R\x03lng\"x\n" +
+	"\x11CompletedKeyPoint\x12 \n" +
+	"\fkey_point_id\x18\x01 \x01(\tR\n" +
+	"keyPointId\x12A\n" +
+	"\x0ecompleted_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\rcompletedTime\"+\n" +
+	"\x10StartTourRequest\x12\x17\n" +
+	"\atour_id\x18\x01 \x01(\tR\x06tourId\"F\n" +
+	"\x11StartTourResponse\x121\n" +
+	"\texecution\x18\x01 \x01(\v2\x13.tour.TourExecutionR\texecution\"{\n" +
+	"\x1aUpdateTourExecutionRequest\x12!\n" +
+	"\fexecution_id\x18\x01 \x01(\tR\vexecutionId\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x10\n" +
+	"\x03lat\x18\x03 \x01(\x01R\x03lat\x12\x10\n" +
+	"\x03lng\x18\x04 \x01(\x01R\x03lng\"P\n" +
+	"\x1bUpdateTourExecutionResponse\x121\n" +
+	"\texecution\x18\x01 \x01(\v2\x13.tour.TourExecutionR\texecution\"B\n" +
+	"\x1dCheckKeypointProximityRequest\x12!\n" +
+	"\fexecution_id\x18\x01 \x01(\tR\vexecutionId\"J\n" +
+	"\x1eCheckKeypointProximityResponse\x12(\n" +
+	"\x10is_near_keypoint\x18\x01 \x01(\bR\x0eisNearKeypoint\"\x8a\x02\n" +
 	"\x11CreateTourRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x1e\n" +
@@ -1884,7 +2485,14 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\vkeypoint_id\x18\x01 \x01(\tR\n" +
 	"keypointId\"(\n" +
 	"\x16DeleteKeypointResponse\x12\x0e\n" +
-	"\x02ok\x18\x01 \x01(\bR\x02ok2\xfd\t\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok\"?\n" +
+	"\x1aGetCompletionStatusRequest\x12!\n" +
+	"\fexecution_id\x18\x01 \x01(\tR\vexecutionId\"\xb8\x01\n" +
+	"\x1bGetCompletionStatusResponse\x12/\n" +
+	"\x13completed_keypoints\x18\x01 \x01(\x05R\x12completedKeypoints\x12'\n" +
+	"\x0ftotal_keypoints\x18\x02 \x01(\x05R\x0etotalKeypoints\x12#\n" +
+	"\rall_completed\x18\x03 \x01(\bR\fallCompleted\x12\x1a\n" +
+	"\bprogress\x18\x04 \x01(\tR\bprogress2\xa4\x0e\n" +
 	"\vTourService\x12U\n" +
 	"\n" +
 	"CreateTour\x12\x17.tour.CreateTourRequest\x1a\x18.tour.CreateTourResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/api/tour\x12q\n" +
@@ -1900,7 +2508,11 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\x10GetKeypointImage\x12\x1d.tour.GetKeypointImageRequest\x1a\x10.tour.ImageChunk\"*\x82\xd3\xe4\x93\x02$\x12\"/api/keypoints/{keypoint_id}/image0\x01\x12\x84\x01\n" +
 	"\x10ReorderKeypoints\x12\x1d.tour.ReorderKeypointsRequest\x1a\x1e.tour.ReorderKeypointsResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/api/tours/{tour_id}/keypoints/reorder\x12t\n" +
 	"\x0eUpdateKeypoint\x12\x1b.tour.UpdateKeypointRequest\x1a\x1c.tour.UpdateKeypointResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\x1a\x1c/api/keypoints/{keypoint_id}\x12q\n" +
-	"\x0eDeleteKeypoint\x12\x1b.tour.DeleteKeypointRequest\x1a\x1c.tour.DeleteKeypointResponse\"$\x82\xd3\xe4\x93\x02\x1e*\x1c/api/keypoints/{keypoint_id}B\fZ\n" +
+	"\x0eDeleteKeypoint\x12\x1b.tour.DeleteKeypointRequest\x1a\x1c.tour.DeleteKeypointResponse\"$\x82\xd3\xe4\x93\x02\x1e*\x1c/api/keypoints/{keypoint_id}\x12\\\n" +
+	"\tStartTour\x12\x16.tour.StartTourRequest\x1a\x17.tour.StartTourResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/tour-execution\x12\x89\x01\n" +
+	"\x13UpdateTourExecution\x12 .tour.UpdateTourExecutionRequest\x1a!.tour.UpdateTourExecutionResponse\"-\x82\xd3\xe4\x93\x02':\x01*\x1a\"/api/tour-execution/{execution_id}\x12\x9f\x01\n" +
+	"\x16CheckKeypointProximity\x12#.tour.CheckKeypointProximityRequest\x1a$.tour.CheckKeypointProximityResponse\":\x82\xd3\xe4\x93\x024\x122/api/tour-execution/{execution_id}/check-proximity\x12\x98\x01\n" +
+	"\x13GetCompletionStatus\x12 .tour.GetCompletionStatusRequest\x1a!.tour.GetCompletionStatusResponse\"<\x82\xd3\xe4\x93\x026\x124/api/tour-execution/{execution_id}/completion-statusB\fZ\n" +
 	"proto/tourb\x06proto3"
 
 var (
@@ -1915,89 +2527,114 @@ func file_tour_tour_proto_rawDescGZIP() []byte {
 	return file_tour_tour_proto_rawDescData
 }
 
-var file_tour_tour_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
+var file_tour_tour_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
 var file_tour_tour_proto_goTypes = []any{
-	(*Tour)(nil),                     // 0: tour.Tour
-	(*Keypoint)(nil),                 // 1: tour.Keypoint
-	(*Review)(nil),                   // 2: tour.Review
-	(*CreateTourRequest)(nil),        // 3: tour.CreateTourRequest
-	(*CreateTourResponse)(nil),       // 4: tour.CreateTourResponse
-	(*GetToursByAuthorRequest)(nil),  // 5: tour.GetToursByAuthorRequest
-	(*GetToursByAuthorResponse)(nil), // 6: tour.GetToursByAuthorResponse
-	(*GetTourRequest)(nil),           // 7: tour.GetTourRequest
-	(*GetTourResponse)(nil),          // 8: tour.GetTourResponse
-	(*GetAllToursRequest)(nil),       // 9: tour.GetAllToursRequest
-	(*GetAllToursResponse)(nil),      // 10: tour.GetAllToursResponse
-	(*CreateReviewRequest)(nil),      // 11: tour.CreateReviewRequest
-	(*Image)(nil),                    // 12: tour.Image
-	(*CreateReviewResponse)(nil),     // 13: tour.CreateReviewResponse
-	(*GetReviewsByTourRequest)(nil),  // 14: tour.GetReviewsByTourRequest
-	(*GetReviewsByTourResponse)(nil), // 15: tour.GetReviewsByTourResponse
-	(*UpdateTourRequest)(nil),        // 16: tour.UpdateTourRequest
-	(*UpdateTourResponse)(nil),       // 17: tour.UpdateTourResponse
-	(*AddKeypointRequest)(nil),       // 18: tour.AddKeypointRequest
-	(*AddKeypointResponse)(nil),      // 19: tour.AddKeypointResponse
-	(*GetKeypointImageRequest)(nil),  // 20: tour.GetKeypointImageRequest
-	(*ImageChunk)(nil),               // 21: tour.ImageChunk
-	(*ReorderKeypointsRequest)(nil),  // 22: tour.ReorderKeypointsRequest
-	(*ReorderKeypointsResponse)(nil), // 23: tour.ReorderKeypointsResponse
-	(*UpdateKeypointRequest)(nil),    // 24: tour.UpdateKeypointRequest
-	(*UpdateKeypointResponse)(nil),   // 25: tour.UpdateKeypointResponse
-	(*DeleteKeypointRequest)(nil),    // 26: tour.DeleteKeypointRequest
-	(*DeleteKeypointResponse)(nil),   // 27: tour.DeleteKeypointResponse
-	nil,                              // 28: tour.Tour.TravelTimesEntry
-	nil,                              // 29: tour.CreateTourRequest.TravelTimesEntry
-	nil,                              // 30: tour.UpdateTourRequest.TravelTimesEntry
-	(*timestamppb.Timestamp)(nil),    // 31: google.protobuf.Timestamp
+	(*Tour)(nil),                           // 0: tour.Tour
+	(*Keypoint)(nil),                       // 1: tour.Keypoint
+	(*Review)(nil),                         // 2: tour.Review
+	(*TourExecution)(nil),                  // 3: tour.TourExecution
+	(*CompletedKeyPoint)(nil),              // 4: tour.CompletedKeyPoint
+	(*StartTourRequest)(nil),               // 5: tour.StartTourRequest
+	(*StartTourResponse)(nil),              // 6: tour.StartTourResponse
+	(*UpdateTourExecutionRequest)(nil),     // 7: tour.UpdateTourExecutionRequest
+	(*UpdateTourExecutionResponse)(nil),    // 8: tour.UpdateTourExecutionResponse
+	(*CheckKeypointProximityRequest)(nil),  // 9: tour.CheckKeypointProximityRequest
+	(*CheckKeypointProximityResponse)(nil), // 10: tour.CheckKeypointProximityResponse
+	(*CreateTourRequest)(nil),              // 11: tour.CreateTourRequest
+	(*CreateTourResponse)(nil),             // 12: tour.CreateTourResponse
+	(*GetToursByAuthorRequest)(nil),        // 13: tour.GetToursByAuthorRequest
+	(*GetToursByAuthorResponse)(nil),       // 14: tour.GetToursByAuthorResponse
+	(*GetTourRequest)(nil),                 // 15: tour.GetTourRequest
+	(*GetTourResponse)(nil),                // 16: tour.GetTourResponse
+	(*GetAllToursRequest)(nil),             // 17: tour.GetAllToursRequest
+	(*GetAllToursResponse)(nil),            // 18: tour.GetAllToursResponse
+	(*CreateReviewRequest)(nil),            // 19: tour.CreateReviewRequest
+	(*Image)(nil),                          // 20: tour.Image
+	(*CreateReviewResponse)(nil),           // 21: tour.CreateReviewResponse
+	(*GetReviewsByTourRequest)(nil),        // 22: tour.GetReviewsByTourRequest
+	(*GetReviewsByTourResponse)(nil),       // 23: tour.GetReviewsByTourResponse
+	(*UpdateTourRequest)(nil),              // 24: tour.UpdateTourRequest
+	(*UpdateTourResponse)(nil),             // 25: tour.UpdateTourResponse
+	(*AddKeypointRequest)(nil),             // 26: tour.AddKeypointRequest
+	(*AddKeypointResponse)(nil),            // 27: tour.AddKeypointResponse
+	(*GetKeypointImageRequest)(nil),        // 28: tour.GetKeypointImageRequest
+	(*ImageChunk)(nil),                     // 29: tour.ImageChunk
+	(*ReorderKeypointsRequest)(nil),        // 30: tour.ReorderKeypointsRequest
+	(*ReorderKeypointsResponse)(nil),       // 31: tour.ReorderKeypointsResponse
+	(*UpdateKeypointRequest)(nil),          // 32: tour.UpdateKeypointRequest
+	(*UpdateKeypointResponse)(nil),         // 33: tour.UpdateKeypointResponse
+	(*DeleteKeypointRequest)(nil),          // 34: tour.DeleteKeypointRequest
+	(*DeleteKeypointResponse)(nil),         // 35: tour.DeleteKeypointResponse
+	(*GetCompletionStatusRequest)(nil),     // 36: tour.GetCompletionStatusRequest
+	(*GetCompletionStatusResponse)(nil),    // 37: tour.GetCompletionStatusResponse
+	nil,                                    // 38: tour.Tour.TravelTimesEntry
+	nil,                                    // 39: tour.CreateTourRequest.TravelTimesEntry
+	nil,                                    // 40: tour.UpdateTourRequest.TravelTimesEntry
+	(*timestamppb.Timestamp)(nil),          // 41: google.protobuf.Timestamp
 }
 var file_tour_tour_proto_depIdxs = []int32{
-	28, // 0: tour.Tour.travel_times:type_name -> tour.Tour.TravelTimesEntry
-	31, // 1: tour.Tour.created_at:type_name -> google.protobuf.Timestamp
-	31, // 2: tour.Review.visit_date:type_name -> google.protobuf.Timestamp
-	31, // 3: tour.Review.created_at:type_name -> google.protobuf.Timestamp
-	29, // 4: tour.CreateTourRequest.travel_times:type_name -> tour.CreateTourRequest.TravelTimesEntry
-	0,  // 5: tour.CreateTourResponse.tour:type_name -> tour.Tour
-	0,  // 6: tour.GetToursByAuthorResponse.tours:type_name -> tour.Tour
-	0,  // 7: tour.GetTourResponse.tour:type_name -> tour.Tour
-	1,  // 8: tour.GetTourResponse.keypoints:type_name -> tour.Keypoint
-	0,  // 9: tour.GetAllToursResponse.tours:type_name -> tour.Tour
-	31, // 10: tour.CreateReviewRequest.visit_date:type_name -> google.protobuf.Timestamp
-	12, // 11: tour.CreateReviewRequest.images:type_name -> tour.Image
-	2,  // 12: tour.CreateReviewResponse.review:type_name -> tour.Review
-	2,  // 13: tour.GetReviewsByTourResponse.reviews:type_name -> tour.Review
-	30, // 14: tour.UpdateTourRequest.travel_times:type_name -> tour.UpdateTourRequest.TravelTimesEntry
-	0,  // 15: tour.UpdateTourResponse.tour:type_name -> tour.Tour
-	1,  // 16: tour.AddKeypointResponse.keypoint:type_name -> tour.Keypoint
-	1,  // 17: tour.UpdateKeypointResponse.keypoint:type_name -> tour.Keypoint
-	3,  // 18: tour.TourService.CreateTour:input_type -> tour.CreateTourRequest
-	5,  // 19: tour.TourService.GetToursByAuthor:input_type -> tour.GetToursByAuthorRequest
-	7,  // 20: tour.TourService.GetTour:input_type -> tour.GetTourRequest
-	9,  // 21: tour.TourService.GetAllTours:input_type -> tour.GetAllToursRequest
-	11, // 22: tour.TourService.CreateReview:input_type -> tour.CreateReviewRequest
-	16, // 23: tour.TourService.UpdateTour:input_type -> tour.UpdateTourRequest
-	14, // 24: tour.TourService.GetReviewsByTour:input_type -> tour.GetReviewsByTourRequest
-	18, // 25: tour.TourService.AddKeypoint:input_type -> tour.AddKeypointRequest
-	20, // 26: tour.TourService.GetKeypointImage:input_type -> tour.GetKeypointImageRequest
-	22, // 27: tour.TourService.ReorderKeypoints:input_type -> tour.ReorderKeypointsRequest
-	24, // 28: tour.TourService.UpdateKeypoint:input_type -> tour.UpdateKeypointRequest
-	26, // 29: tour.TourService.DeleteKeypoint:input_type -> tour.DeleteKeypointRequest
-	4,  // 30: tour.TourService.CreateTour:output_type -> tour.CreateTourResponse
-	6,  // 31: tour.TourService.GetToursByAuthor:output_type -> tour.GetToursByAuthorResponse
-	8,  // 32: tour.TourService.GetTour:output_type -> tour.GetTourResponse
-	10, // 33: tour.TourService.GetAllTours:output_type -> tour.GetAllToursResponse
-	13, // 34: tour.TourService.CreateReview:output_type -> tour.CreateReviewResponse
-	17, // 35: tour.TourService.UpdateTour:output_type -> tour.UpdateTourResponse
-	15, // 36: tour.TourService.GetReviewsByTour:output_type -> tour.GetReviewsByTourResponse
-	19, // 37: tour.TourService.AddKeypoint:output_type -> tour.AddKeypointResponse
-	21, // 38: tour.TourService.GetKeypointImage:output_type -> tour.ImageChunk
-	23, // 39: tour.TourService.ReorderKeypoints:output_type -> tour.ReorderKeypointsResponse
-	25, // 40: tour.TourService.UpdateKeypoint:output_type -> tour.UpdateKeypointResponse
-	27, // 41: tour.TourService.DeleteKeypoint:output_type -> tour.DeleteKeypointResponse
-	30, // [30:42] is the sub-list for method output_type
-	18, // [18:30] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	38, // 0: tour.Tour.travel_times:type_name -> tour.Tour.TravelTimesEntry
+	41, // 1: tour.Tour.created_at:type_name -> google.protobuf.Timestamp
+	41, // 2: tour.Review.visit_date:type_name -> google.protobuf.Timestamp
+	41, // 3: tour.Review.created_at:type_name -> google.protobuf.Timestamp
+	4,  // 4: tour.TourExecution.completed_key_points:type_name -> tour.CompletedKeyPoint
+	41, // 5: tour.TourExecution.start_time:type_name -> google.protobuf.Timestamp
+	41, // 6: tour.TourExecution.end_time:type_name -> google.protobuf.Timestamp
+	41, // 7: tour.TourExecution.last_activity:type_name -> google.protobuf.Timestamp
+	41, // 8: tour.CompletedKeyPoint.completed_time:type_name -> google.protobuf.Timestamp
+	3,  // 9: tour.StartTourResponse.execution:type_name -> tour.TourExecution
+	3,  // 10: tour.UpdateTourExecutionResponse.execution:type_name -> tour.TourExecution
+	39, // 11: tour.CreateTourRequest.travel_times:type_name -> tour.CreateTourRequest.TravelTimesEntry
+	0,  // 12: tour.CreateTourResponse.tour:type_name -> tour.Tour
+	0,  // 13: tour.GetToursByAuthorResponse.tours:type_name -> tour.Tour
+	0,  // 14: tour.GetTourResponse.tour:type_name -> tour.Tour
+	1,  // 15: tour.GetTourResponse.keypoints:type_name -> tour.Keypoint
+	0,  // 16: tour.GetAllToursResponse.tours:type_name -> tour.Tour
+	41, // 17: tour.CreateReviewRequest.visit_date:type_name -> google.protobuf.Timestamp
+	20, // 18: tour.CreateReviewRequest.images:type_name -> tour.Image
+	2,  // 19: tour.CreateReviewResponse.review:type_name -> tour.Review
+	2,  // 20: tour.GetReviewsByTourResponse.reviews:type_name -> tour.Review
+	40, // 21: tour.UpdateTourRequest.travel_times:type_name -> tour.UpdateTourRequest.TravelTimesEntry
+	0,  // 22: tour.UpdateTourResponse.tour:type_name -> tour.Tour
+	1,  // 23: tour.AddKeypointResponse.keypoint:type_name -> tour.Keypoint
+	1,  // 24: tour.UpdateKeypointResponse.keypoint:type_name -> tour.Keypoint
+	11, // 25: tour.TourService.CreateTour:input_type -> tour.CreateTourRequest
+	13, // 26: tour.TourService.GetToursByAuthor:input_type -> tour.GetToursByAuthorRequest
+	15, // 27: tour.TourService.GetTour:input_type -> tour.GetTourRequest
+	17, // 28: tour.TourService.GetAllTours:input_type -> tour.GetAllToursRequest
+	19, // 29: tour.TourService.CreateReview:input_type -> tour.CreateReviewRequest
+	24, // 30: tour.TourService.UpdateTour:input_type -> tour.UpdateTourRequest
+	22, // 31: tour.TourService.GetReviewsByTour:input_type -> tour.GetReviewsByTourRequest
+	26, // 32: tour.TourService.AddKeypoint:input_type -> tour.AddKeypointRequest
+	28, // 33: tour.TourService.GetKeypointImage:input_type -> tour.GetKeypointImageRequest
+	30, // 34: tour.TourService.ReorderKeypoints:input_type -> tour.ReorderKeypointsRequest
+	32, // 35: tour.TourService.UpdateKeypoint:input_type -> tour.UpdateKeypointRequest
+	34, // 36: tour.TourService.DeleteKeypoint:input_type -> tour.DeleteKeypointRequest
+	5,  // 37: tour.TourService.StartTour:input_type -> tour.StartTourRequest
+	7,  // 38: tour.TourService.UpdateTourExecution:input_type -> tour.UpdateTourExecutionRequest
+	9,  // 39: tour.TourService.CheckKeypointProximity:input_type -> tour.CheckKeypointProximityRequest
+	36, // 40: tour.TourService.GetCompletionStatus:input_type -> tour.GetCompletionStatusRequest
+	12, // 41: tour.TourService.CreateTour:output_type -> tour.CreateTourResponse
+	14, // 42: tour.TourService.GetToursByAuthor:output_type -> tour.GetToursByAuthorResponse
+	16, // 43: tour.TourService.GetTour:output_type -> tour.GetTourResponse
+	18, // 44: tour.TourService.GetAllTours:output_type -> tour.GetAllToursResponse
+	21, // 45: tour.TourService.CreateReview:output_type -> tour.CreateReviewResponse
+	25, // 46: tour.TourService.UpdateTour:output_type -> tour.UpdateTourResponse
+	23, // 47: tour.TourService.GetReviewsByTour:output_type -> tour.GetReviewsByTourResponse
+	27, // 48: tour.TourService.AddKeypoint:output_type -> tour.AddKeypointResponse
+	29, // 49: tour.TourService.GetKeypointImage:output_type -> tour.ImageChunk
+	31, // 50: tour.TourService.ReorderKeypoints:output_type -> tour.ReorderKeypointsResponse
+	33, // 51: tour.TourService.UpdateKeypoint:output_type -> tour.UpdateKeypointResponse
+	35, // 52: tour.TourService.DeleteKeypoint:output_type -> tour.DeleteKeypointResponse
+	6,  // 53: tour.TourService.StartTour:output_type -> tour.StartTourResponse
+	8,  // 54: tour.TourService.UpdateTourExecution:output_type -> tour.UpdateTourExecutionResponse
+	10, // 55: tour.TourService.CheckKeypointProximity:output_type -> tour.CheckKeypointProximityResponse
+	37, // 56: tour.TourService.GetCompletionStatus:output_type -> tour.GetCompletionStatusResponse
+	41, // [41:57] is the sub-list for method output_type
+	25, // [25:41] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_tour_tour_proto_init() }
@@ -2011,7 +2648,7 @@ func file_tour_tour_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tour_tour_proto_rawDesc), len(file_tour_tour_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   31,
+			NumMessages:   41,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
