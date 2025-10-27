@@ -36,9 +36,10 @@ type Tour struct {
 	Status        string                 `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
 	TravelTimes   map[string]int32       `protobuf:"bytes,10,rep,name=travel_times,json=travelTimes,proto3" json:"travel_times,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string                 `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	PublishedAt   string                 `protobuf:"bytes,13,opt,name=published_at,json=publishedAt,proto3" json:"published_at,omitempty"`
-	ArchivedAt    string                 `protobuf:"bytes,14,opt,name=archived_at,json=archivedAt,proto3" json:"archived_at,omitempty"`
+	DepartureDate *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=departure_date,json=departureDate,proto3" json:"departure_date,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	PublishedAt   string                 `protobuf:"bytes,14,opt,name=published_at,json=publishedAt,proto3" json:"published_at,omitempty"`
+	ArchivedAt    string                 `protobuf:"bytes,15,opt,name=archived_at,json=archivedAt,proto3" json:"archived_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -146,6 +147,13 @@ func (x *Tour) GetTravelTimes() map[string]int32 {
 func (x *Tour) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *Tour) GetDepartureDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DepartureDate
 	}
 	return nil
 }
@@ -850,6 +858,8 @@ type CreateTourRequest struct {
 	Difficulty    string                 `protobuf:"bytes,3,opt,name=difficulty,proto3" json:"difficulty,omitempty"`
 	Tags          []string               `protobuf:"bytes,4,rep,name=tags,proto3" json:"tags,omitempty"`
 	TravelTimes   map[string]int32       `protobuf:"bytes,5,rep,name=travel_times,json=travelTimes,proto3" json:"travel_times,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	Price         float64                `protobuf:"fixed64,6,opt,name=price,proto3" json:"price,omitempty"`
+	DepartureDate *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=departure_date,json=departureDate,proto3" json:"departure_date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -915,6 +925,20 @@ func (x *CreateTourRequest) GetTags() []string {
 func (x *CreateTourRequest) GetTravelTimes() map[string]int32 {
 	if x != nil {
 		return x.TravelTimes
+	}
+	return nil
+}
+
+func (x *CreateTourRequest) GetPrice() float64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+func (x *CreateTourRequest) GetDepartureDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DepartureDate
 	}
 	return nil
 }
@@ -1505,6 +1529,8 @@ type UpdateTourRequest struct {
 	TravelTimes   map[string]int32       `protobuf:"bytes,6,rep,name=travel_times,json=travelTimes,proto3" json:"travel_times,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
 	LengthKm      float64                `protobuf:"fixed64,7,opt,name=length_km,json=lengthKm,proto3" json:"length_km,omitempty"`
 	Status        string                 `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
+	Price         float64                `protobuf:"fixed64,9,opt,name=price,proto3" json:"price,omitempty"`
+	DepartureDate *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=departure_date,json=departureDate,proto3" json:"departure_date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1593,6 +1619,20 @@ func (x *UpdateTourRequest) GetStatus() string {
 		return x.Status
 	}
 	return ""
+}
+
+func (x *UpdateTourRequest) GetPrice() float64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+func (x *UpdateTourRequest) GetDepartureDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DepartureDate
+	}
+	return nil
 }
 
 type UpdateTourResponse struct {
@@ -2499,7 +2539,7 @@ var File_tour_tour_proto protoreflect.FileDescriptor
 
 const file_tour_tour_proto_rawDesc = "" +
 	"\n" +
-	"\x0ftour/tour.proto\x12\x04tour\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\x86\x04\n" +
+	"\x0ftour/tour.proto\x12\x04tour\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\xc9\x04\n" +
 	"\x04Tour\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tauthor_id\x18\x02 \x01(\tR\bauthorId\x12\x12\n" +
@@ -2515,11 +2555,12 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\ftravel_times\x18\n" +
 	" \x03(\v2\x1b.tour.Tour.TravelTimesEntryR\vtravelTimes\x129\n" +
 	"\n" +
-	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12A\n" +
+	"\x0edeparture_date\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\rdepartureDate\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\f \x01(\tR\tupdatedAt\x12!\n" +
-	"\fpublished_at\x18\r \x01(\tR\vpublishedAt\x12\x1f\n" +
-	"\varchived_at\x18\x0e \x01(\tR\n" +
+	"updated_at\x18\r \x01(\tR\tupdatedAt\x12!\n" +
+	"\fpublished_at\x18\x0e \x01(\tR\vpublishedAt\x12\x1f\n" +
+	"\varchived_at\x18\x0f \x01(\tR\n" +
 	"archivedAt\x1a>\n" +
 	"\x10TravelTimesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -2584,7 +2625,7 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\x1dCheckKeypointProximityRequest\x12!\n" +
 	"\fexecution_id\x18\x01 \x01(\tR\vexecutionId\"J\n" +
 	"\x1eCheckKeypointProximityResponse\x12(\n" +
-	"\x10is_near_keypoint\x18\x01 \x01(\bR\x0eisNearKeypoint\"\x8a\x02\n" +
+	"\x10is_near_keypoint\x18\x01 \x01(\bR\x0eisNearKeypoint\"\xe3\x02\n" +
 	"\x11CreateTourRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x1e\n" +
@@ -2592,7 +2633,9 @@ const file_tour_tour_proto_rawDesc = "" +
 	"difficulty\x18\x03 \x01(\tR\n" +
 	"difficulty\x12\x12\n" +
 	"\x04tags\x18\x04 \x03(\tR\x04tags\x12K\n" +
-	"\ftravel_times\x18\x05 \x03(\v2(.tour.CreateTourRequest.TravelTimesEntryR\vtravelTimes\x1a>\n" +
+	"\ftravel_times\x18\x05 \x03(\v2(.tour.CreateTourRequest.TravelTimesEntryR\vtravelTimes\x12\x14\n" +
+	"\x05price\x18\x06 \x01(\x01R\x05price\x12A\n" +
+	"\x0edeparture_date\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\rdepartureDate\x1a>\n" +
 	"\x10TravelTimesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"4\n" +
@@ -2630,7 +2673,7 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\x17GetReviewsByTourRequest\x12\x16\n" +
 	"\x06tourId\x18\x01 \x01(\tR\x06tourId\"B\n" +
 	"\x18GetReviewsByTourResponse\x12&\n" +
-	"\areviews\x18\x01 \x03(\v2\f.tour.ReviewR\areviews\"\xcf\x02\n" +
+	"\areviews\x18\x01 \x03(\v2\f.tour.ReviewR\areviews\"\xa8\x03\n" +
 	"\x11UpdateTourRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -2641,7 +2684,10 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\x04tags\x18\x05 \x03(\tR\x04tags\x12K\n" +
 	"\ftravel_times\x18\x06 \x03(\v2(.tour.UpdateTourRequest.TravelTimesEntryR\vtravelTimes\x12\x1b\n" +
 	"\tlength_km\x18\a \x01(\x01R\blengthKm\x12\x16\n" +
-	"\x06status\x18\b \x01(\tR\x06status\x1a>\n" +
+	"\x06status\x18\b \x01(\tR\x06status\x12\x14\n" +
+	"\x05price\x18\t \x01(\x01R\x05price\x12A\n" +
+	"\x0edeparture_date\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\rdepartureDate\x1a>\n" +
 	"\x10TravelTimesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"4\n" +
@@ -2792,50 +2838,50 @@ var file_tour_tour_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),                 // 45: google.protobuf.Timestamp
 }
 var file_tour_tour_proto_depIdxs = []int32{
-	42, // 0: tour.Tour.travel_times:type_name -> tour.Tour.TravelTimesEntry
-	45, // 1: tour.Tour.created_at:type_name -> google.protobuf.Timestamp
-	45, // 2: tour.Review.visit_date:type_name -> google.protobuf.Timestamp
-	45, // 3: tour.Review.created_at:type_name -> google.protobuf.Timestamp
-	4,  // 4: tour.TourExecution.completed_key_points:type_name -> tour.CompletedKeyPoint
-	45, // 5: tour.TourExecution.start_time:type_name -> google.protobuf.Timestamp
-	45, // 6: tour.TourExecution.end_time:type_name -> google.protobuf.Timestamp
-	45, // 7: tour.TourExecution.last_activity:type_name -> google.protobuf.Timestamp
-	45, // 8: tour.CompletedKeyPoint.completed_time:type_name -> google.protobuf.Timestamp
-	3,  // 9: tour.StartTourResponse.execution:type_name -> tour.TourExecution
-	3,  // 10: tour.UpdateTourExecutionResponse.execution:type_name -> tour.TourExecution
-	43, // 11: tour.CreateTourRequest.travel_times:type_name -> tour.CreateTourRequest.TravelTimesEntry
-	0,  // 12: tour.CreateTourResponse.tour:type_name -> tour.Tour
-	0,  // 13: tour.GetToursByAuthorResponse.tours:type_name -> tour.Tour
-	0,  // 14: tour.GetTourResponse.tour:type_name -> tour.Tour
-	1,  // 15: tour.GetTourResponse.keypoints:type_name -> tour.Keypoint
-	0,  // 16: tour.GetAllToursResponse.tours:type_name -> tour.Tour
-	45, // 17: tour.CreateReviewRequest.visit_date:type_name -> google.protobuf.Timestamp
-	20, // 18: tour.CreateReviewRequest.images:type_name -> tour.Image
-	2,  // 19: tour.CreateReviewResponse.review:type_name -> tour.Review
-	2,  // 20: tour.GetReviewsByTourResponse.reviews:type_name -> tour.Review
-	44, // 21: tour.UpdateTourRequest.travel_times:type_name -> tour.UpdateTourRequest.TravelTimesEntry
-	0,  // 22: tour.UpdateTourResponse.tour:type_name -> tour.Tour
-	1,  // 23: tour.AddKeypointResponse.keypoint:type_name -> tour.Keypoint
-	1,  // 24: tour.UpdateKeypointResponse.keypoint:type_name -> tour.Keypoint
-	3,  // 25: tour.GetTourExecutionByUserAndTourResponse.execution:type_name -> tour.TourExecution
-	11, // 26: tour.TourService.CreateTour:input_type -> tour.CreateTourRequest
-	13, // 27: tour.TourService.GetToursByAuthor:input_type -> tour.GetToursByAuthorRequest
-	15, // 28: tour.TourService.GetTour:input_type -> tour.GetTourRequest
-	17, // 29: tour.TourService.GetAllTours:input_type -> tour.GetAllToursRequest
-	19, // 30: tour.TourService.CreateReview:input_type -> tour.CreateReviewRequest
-	24, // 31: tour.TourService.UpdateTour:input_type -> tour.UpdateTourRequest
-	22, // 32: tour.TourService.GetReviewsByTour:input_type -> tour.GetReviewsByTourRequest
-	26, // 33: tour.TourService.AddKeypoint:input_type -> tour.AddKeypointRequest
-	28, // 34: tour.TourService.GetKeypointImage:input_type -> tour.GetKeypointImageRequest
-	30, // 35: tour.TourService.ReorderKeypoints:input_type -> tour.ReorderKeypointsRequest
-	32, // 36: tour.TourService.UpdateKeypoint:input_type -> tour.UpdateKeypointRequest
-	34, // 37: tour.TourService.DeleteKeypoint:input_type -> tour.DeleteKeypointRequest
-	5,  // 38: tour.TourService.StartTour:input_type -> tour.StartTourRequest
-	7,  // 39: tour.TourService.UpdateTourExecution:input_type -> tour.UpdateTourExecutionRequest
-	9,  // 40: tour.TourService.CheckKeypointProximity:input_type -> tour.CheckKeypointProximityRequest
-	36, // 41: tour.TourService.GetCompletionStatus:input_type -> tour.GetCompletionStatusRequest
-	40, // 42: tour.TourService.CheckReviewExists:input_type -> tour.CheckReviewExistsRequest
-	38, // 43: tour.TourService.GetTourExecutionByUserAndTour:input_type -> tour.GetTourExecutionByUserAndTourRequest
+	38, // 0: tour.Tour.travel_times:type_name -> tour.Tour.TravelTimesEntry
+	41, // 1: tour.Tour.created_at:type_name -> google.protobuf.Timestamp
+	41, // 2: tour.Tour.departure_date:type_name -> google.protobuf.Timestamp
+	41, // 3: tour.Review.visit_date:type_name -> google.protobuf.Timestamp
+	41, // 4: tour.Review.created_at:type_name -> google.protobuf.Timestamp
+	4,  // 5: tour.TourExecution.completed_key_points:type_name -> tour.CompletedKeyPoint
+	41, // 6: tour.TourExecution.start_time:type_name -> google.protobuf.Timestamp
+	41, // 7: tour.TourExecution.end_time:type_name -> google.protobuf.Timestamp
+	41, // 8: tour.TourExecution.last_activity:type_name -> google.protobuf.Timestamp
+	41, // 9: tour.CompletedKeyPoint.completed_time:type_name -> google.protobuf.Timestamp
+	3,  // 10: tour.StartTourResponse.execution:type_name -> tour.TourExecution
+	3,  // 11: tour.UpdateTourExecutionResponse.execution:type_name -> tour.TourExecution
+	39, // 12: tour.CreateTourRequest.travel_times:type_name -> tour.CreateTourRequest.TravelTimesEntry
+	41, // 13: tour.CreateTourRequest.departure_date:type_name -> google.protobuf.Timestamp
+	0,  // 14: tour.CreateTourResponse.tour:type_name -> tour.Tour
+	0,  // 15: tour.GetToursByAuthorResponse.tours:type_name -> tour.Tour
+	0,  // 16: tour.GetTourResponse.tour:type_name -> tour.Tour
+	1,  // 17: tour.GetTourResponse.keypoints:type_name -> tour.Keypoint
+	0,  // 18: tour.GetAllToursResponse.tours:type_name -> tour.Tour
+	41, // 19: tour.CreateReviewRequest.visit_date:type_name -> google.protobuf.Timestamp
+	20, // 20: tour.CreateReviewRequest.images:type_name -> tour.Image
+	2,  // 21: tour.CreateReviewResponse.review:type_name -> tour.Review
+	2,  // 22: tour.GetReviewsByTourResponse.reviews:type_name -> tour.Review
+	40, // 23: tour.UpdateTourRequest.travel_times:type_name -> tour.UpdateTourRequest.TravelTimesEntry
+	41, // 24: tour.UpdateTourRequest.departure_date:type_name -> google.protobuf.Timestamp
+	0,  // 25: tour.UpdateTourResponse.tour:type_name -> tour.Tour
+	1,  // 26: tour.AddKeypointResponse.keypoint:type_name -> tour.Keypoint
+	1,  // 27: tour.UpdateKeypointResponse.keypoint:type_name -> tour.Keypoint
+	11, // 28: tour.TourService.CreateTour:input_type -> tour.CreateTourRequest
+	13, // 29: tour.TourService.GetToursByAuthor:input_type -> tour.GetToursByAuthorRequest
+	15, // 30: tour.TourService.GetTour:input_type -> tour.GetTourRequest
+	17, // 31: tour.TourService.GetAllTours:input_type -> tour.GetAllToursRequest
+	19, // 32: tour.TourService.CreateReview:input_type -> tour.CreateReviewRequest
+	24, // 33: tour.TourService.UpdateTour:input_type -> tour.UpdateTourRequest
+	22, // 34: tour.TourService.GetReviewsByTour:input_type -> tour.GetReviewsByTourRequest
+	26, // 35: tour.TourService.AddKeypoint:input_type -> tour.AddKeypointRequest
+	28, // 36: tour.TourService.GetKeypointImage:input_type -> tour.GetKeypointImageRequest
+	30, // 37: tour.TourService.ReorderKeypoints:input_type -> tour.ReorderKeypointsRequest
+	32, // 38: tour.TourService.UpdateKeypoint:input_type -> tour.UpdateKeypointRequest
+	34, // 39: tour.TourService.DeleteKeypoint:input_type -> tour.DeleteKeypointRequest
+	5,  // 40: tour.TourService.StartTour:input_type -> tour.StartTourRequest
+	7,  // 41: tour.TourService.UpdateTourExecution:input_type -> tour.UpdateTourExecutionRequest
+	9,  // 42: tour.TourService.CheckKeypointProximity:input_type -> tour.CheckKeypointProximityRequest
+	36, // 43: tour.TourService.GetCompletionStatus:input_type -> tour.GetCompletionStatusRequest
 	12, // 44: tour.TourService.CreateTour:output_type -> tour.CreateTourResponse
 	14, // 45: tour.TourService.GetToursByAuthor:output_type -> tour.GetToursByAuthorResponse
 	16, // 46: tour.TourService.GetTour:output_type -> tour.GetTourResponse
@@ -2852,13 +2898,11 @@ var file_tour_tour_proto_depIdxs = []int32{
 	8,  // 57: tour.TourService.UpdateTourExecution:output_type -> tour.UpdateTourExecutionResponse
 	10, // 58: tour.TourService.CheckKeypointProximity:output_type -> tour.CheckKeypointProximityResponse
 	37, // 59: tour.TourService.GetCompletionStatus:output_type -> tour.GetCompletionStatusResponse
-	41, // 60: tour.TourService.CheckReviewExists:output_type -> tour.CheckReviewExistsResponse
-	39, // 61: tour.TourService.GetTourExecutionByUserAndTour:output_type -> tour.GetTourExecutionByUserAndTourResponse
-	44, // [44:62] is the sub-list for method output_type
-	26, // [26:44] is the sub-list for method input_type
-	26, // [26:26] is the sub-list for extension type_name
-	26, // [26:26] is the sub-list for extension extendee
-	0,  // [0:26] is the sub-list for field type_name
+	44, // [44:60] is the sub-list for method output_type
+	28, // [28:44] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_tour_tour_proto_init() }
