@@ -19,18 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TourService_CreateTour_FullMethodName       = "/tour.TourService/CreateTour"
-	TourService_GetToursByAuthor_FullMethodName = "/tour.TourService/GetToursByAuthor"
-	TourService_GetTour_FullMethodName          = "/tour.TourService/GetTour"
-	TourService_GetAllTours_FullMethodName      = "/tour.TourService/GetAllTours"
-	TourService_CreateReview_FullMethodName     = "/tour.TourService/CreateReview"
-	TourService_UpdateTour_FullMethodName       = "/tour.TourService/UpdateTour"
-	TourService_GetReviewsByTour_FullMethodName = "/tour.TourService/GetReviewsByTour"
-	TourService_AddKeypoint_FullMethodName      = "/tour.TourService/AddKeypoint"
-	TourService_GetKeypointImage_FullMethodName = "/tour.TourService/GetKeypointImage"
-	TourService_ReorderKeypoints_FullMethodName = "/tour.TourService/ReorderKeypoints"
-	TourService_UpdateKeypoint_FullMethodName   = "/tour.TourService/UpdateKeypoint"
-	TourService_DeleteKeypoint_FullMethodName   = "/tour.TourService/DeleteKeypoint"
+	TourService_CreateTour_FullMethodName             = "/tour.TourService/CreateTour"
+	TourService_GetToursByAuthor_FullMethodName       = "/tour.TourService/GetToursByAuthor"
+	TourService_GetTour_FullMethodName                = "/tour.TourService/GetTour"
+	TourService_GetAllTours_FullMethodName            = "/tour.TourService/GetAllTours"
+	TourService_CreateReview_FullMethodName           = "/tour.TourService/CreateReview"
+	TourService_UpdateTour_FullMethodName             = "/tour.TourService/UpdateTour"
+	TourService_GetReviewsByTour_FullMethodName       = "/tour.TourService/GetReviewsByTour"
+	TourService_AddKeypoint_FullMethodName            = "/tour.TourService/AddKeypoint"
+	TourService_GetKeypointImage_FullMethodName       = "/tour.TourService/GetKeypointImage"
+	TourService_ReorderKeypoints_FullMethodName       = "/tour.TourService/ReorderKeypoints"
+	TourService_UpdateKeypoint_FullMethodName         = "/tour.TourService/UpdateKeypoint"
+	TourService_DeleteKeypoint_FullMethodName         = "/tour.TourService/DeleteKeypoint"
+	TourService_StartTour_FullMethodName              = "/tour.TourService/StartTour"
+	TourService_UpdateTourExecution_FullMethodName    = "/tour.TourService/UpdateTourExecution"
+	TourService_CheckKeypointProximity_FullMethodName = "/tour.TourService/CheckKeypointProximity"
+	TourService_GetCompletionStatus_FullMethodName    = "/tour.TourService/GetCompletionStatus"
 )
 
 // TourServiceClient is the client API for TourService service.
@@ -49,6 +53,10 @@ type TourServiceClient interface {
 	ReorderKeypoints(ctx context.Context, in *ReorderKeypointsRequest, opts ...grpc.CallOption) (*ReorderKeypointsResponse, error)
 	UpdateKeypoint(ctx context.Context, in *UpdateKeypointRequest, opts ...grpc.CallOption) (*UpdateKeypointResponse, error)
 	DeleteKeypoint(ctx context.Context, in *DeleteKeypointRequest, opts ...grpc.CallOption) (*DeleteKeypointResponse, error)
+	StartTour(ctx context.Context, in *StartTourRequest, opts ...grpc.CallOption) (*StartTourResponse, error)
+	UpdateTourExecution(ctx context.Context, in *UpdateTourExecutionRequest, opts ...grpc.CallOption) (*UpdateTourExecutionResponse, error)
+	CheckKeypointProximity(ctx context.Context, in *CheckKeypointProximityRequest, opts ...grpc.CallOption) (*CheckKeypointProximityResponse, error)
+	GetCompletionStatus(ctx context.Context, in *GetCompletionStatusRequest, opts ...grpc.CallOption) (*GetCompletionStatusResponse, error)
 }
 
 type tourServiceClient struct {
@@ -188,6 +196,46 @@ func (c *tourServiceClient) DeleteKeypoint(ctx context.Context, in *DeleteKeypoi
 	return out, nil
 }
 
+func (c *tourServiceClient) StartTour(ctx context.Context, in *StartTourRequest, opts ...grpc.CallOption) (*StartTourResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartTourResponse)
+	err := c.cc.Invoke(ctx, TourService_StartTour_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tourServiceClient) UpdateTourExecution(ctx context.Context, in *UpdateTourExecutionRequest, opts ...grpc.CallOption) (*UpdateTourExecutionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTourExecutionResponse)
+	err := c.cc.Invoke(ctx, TourService_UpdateTourExecution_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tourServiceClient) CheckKeypointProximity(ctx context.Context, in *CheckKeypointProximityRequest, opts ...grpc.CallOption) (*CheckKeypointProximityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckKeypointProximityResponse)
+	err := c.cc.Invoke(ctx, TourService_CheckKeypointProximity_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tourServiceClient) GetCompletionStatus(ctx context.Context, in *GetCompletionStatusRequest, opts ...grpc.CallOption) (*GetCompletionStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCompletionStatusResponse)
+	err := c.cc.Invoke(ctx, TourService_GetCompletionStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TourServiceServer is the server API for TourService service.
 // All implementations must embed UnimplementedTourServiceServer
 // for forward compatibility.
@@ -204,6 +252,10 @@ type TourServiceServer interface {
 	ReorderKeypoints(context.Context, *ReorderKeypointsRequest) (*ReorderKeypointsResponse, error)
 	UpdateKeypoint(context.Context, *UpdateKeypointRequest) (*UpdateKeypointResponse, error)
 	DeleteKeypoint(context.Context, *DeleteKeypointRequest) (*DeleteKeypointResponse, error)
+	StartTour(context.Context, *StartTourRequest) (*StartTourResponse, error)
+	UpdateTourExecution(context.Context, *UpdateTourExecutionRequest) (*UpdateTourExecutionResponse, error)
+	CheckKeypointProximity(context.Context, *CheckKeypointProximityRequest) (*CheckKeypointProximityResponse, error)
+	GetCompletionStatus(context.Context, *GetCompletionStatusRequest) (*GetCompletionStatusResponse, error)
 	mustEmbedUnimplementedTourServiceServer()
 }
 
@@ -249,6 +301,18 @@ func (UnimplementedTourServiceServer) UpdateKeypoint(context.Context, *UpdateKey
 }
 func (UnimplementedTourServiceServer) DeleteKeypoint(context.Context, *DeleteKeypointRequest) (*DeleteKeypointResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteKeypoint not implemented")
+}
+func (UnimplementedTourServiceServer) StartTour(context.Context, *StartTourRequest) (*StartTourResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartTour not implemented")
+}
+func (UnimplementedTourServiceServer) UpdateTourExecution(context.Context, *UpdateTourExecutionRequest) (*UpdateTourExecutionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTourExecution not implemented")
+}
+func (UnimplementedTourServiceServer) CheckKeypointProximity(context.Context, *CheckKeypointProximityRequest) (*CheckKeypointProximityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckKeypointProximity not implemented")
+}
+func (UnimplementedTourServiceServer) GetCompletionStatus(context.Context, *GetCompletionStatusRequest) (*GetCompletionStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCompletionStatus not implemented")
 }
 func (UnimplementedTourServiceServer) mustEmbedUnimplementedTourServiceServer() {}
 func (UnimplementedTourServiceServer) testEmbeddedByValue()                     {}
@@ -480,6 +544,78 @@ func _TourService_DeleteKeypoint_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TourService_StartTour_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartTourRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).StartTour(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_StartTour_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).StartTour(ctx, req.(*StartTourRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TourService_UpdateTourExecution_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTourExecutionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).UpdateTourExecution(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_UpdateTourExecution_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).UpdateTourExecution(ctx, req.(*UpdateTourExecutionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TourService_CheckKeypointProximity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckKeypointProximityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).CheckKeypointProximity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_CheckKeypointProximity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).CheckKeypointProximity(ctx, req.(*CheckKeypointProximityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TourService_GetCompletionStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCompletionStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).GetCompletionStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_GetCompletionStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).GetCompletionStatus(ctx, req.(*GetCompletionStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TourService_ServiceDesc is the grpc.ServiceDesc for TourService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -530,6 +666,22 @@ var TourService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteKeypoint",
 			Handler:    _TourService_DeleteKeypoint_Handler,
+		},
+		{
+			MethodName: "StartTour",
+			Handler:    _TourService_StartTour_Handler,
+		},
+		{
+			MethodName: "UpdateTourExecution",
+			Handler:    _TourService_UpdateTourExecution_Handler,
+		},
+		{
+			MethodName: "CheckKeypointProximity",
+			Handler:    _TourService_CheckKeypointProximity_Handler,
+		},
+		{
+			MethodName: "GetCompletionStatus",
+			Handler:    _TourService_GetCompletionStatus_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

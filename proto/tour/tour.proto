@@ -48,6 +48,51 @@ message Review {
   google.protobuf.Timestamp created_at = 8;
 }
 
+message TourExecution {
+  string id = 1;
+  string tour_id = 2;
+  string tourist_id = 3;
+  string status = 4; 
+  repeated CompletedKeyPoint completed_key_points = 5;
+  google.protobuf.Timestamp start_time = 6;
+  google.protobuf.Timestamp end_time = 7;
+  google.protobuf.Timestamp last_activity = 8;
+  double lat = 9;
+  double lng = 10;
+}
+
+message CompletedKeyPoint {
+  string key_point_id = 1;  
+  google.protobuf.Timestamp completed_time = 2;  
+}
+
+message StartTourRequest {
+  string tour_id = 1;
+}
+
+message StartTourResponse {
+  TourExecution execution = 1;
+}
+
+message UpdateTourExecutionRequest {
+  string execution_id = 1;
+  string status = 2; 
+  double lat = 3;
+  double lng = 4;
+}
+
+message UpdateTourExecutionResponse {
+  TourExecution execution = 1;
+}
+
+message CheckKeypointProximityRequest {
+  string execution_id = 1;
+}
+
+message CheckKeypointProximityResponse {
+  bool is_near_keypoint = 1;
+}
+
 message CreateTourRequest {
     string name = 1;
     string description = 2;
@@ -164,6 +209,17 @@ message DeleteKeypointResponse {
   bool ok = 1;
 }
 
+message GetCompletionStatusRequest {
+  string execution_id = 1;
+}
+
+message GetCompletionStatusResponse {
+  int32 completed_keypoints = 1;
+  int32 total_keypoints = 2;
+  bool all_completed = 3;
+  string progress = 4;
+}
+
 service TourService {
     rpc CreateTour(CreateTourRequest) returns (CreateTourResponse) {
         option (google.api.http) = {
@@ -239,6 +295,32 @@ service TourService {
     rpc DeleteKeypoint(DeleteKeypointRequest) returns (DeleteKeypointResponse) {
       option (google.api.http) = {
         delete: "/api/keypoints/{keypoint_id}"
+      };
+    }
+
+    rpc StartTour(StartTourRequest) returns (StartTourResponse) {
+      option (google.api.http) = {
+        post: "/api/tour-execution"
+        body: "*"
+      };
+    }
+
+    rpc UpdateTourExecution(UpdateTourExecutionRequest) returns (UpdateTourExecutionResponse) {
+      option (google.api.http) = {
+        put: "/api/tour-execution/{execution_id}"
+        body: "*"
+      };
+    }
+
+    rpc CheckKeypointProximity(CheckKeypointProximityRequest) returns (CheckKeypointProximityResponse) {
+      option (google.api.http) = {
+        get: "/api/tour-execution/{execution_id}/check-proximity"
+      };
+    }
+
+    rpc GetCompletionStatus(GetCompletionStatusRequest) returns (GetCompletionStatusResponse) {
+      option (google.api.http) = {
+        get: "/api/tour-execution/{execution_id}/completion-status"
       };
     }
 }
