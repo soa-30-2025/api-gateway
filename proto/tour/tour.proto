@@ -220,6 +220,25 @@ message GetCompletionStatusResponse {
   string progress = 4;
 }
 
+message GetTourExecutionByUserAndTourRequest {
+  string tourist_id = 1;
+  string tour_id = 2;
+}
+
+message GetTourExecutionByUserAndTourResponse {
+  TourExecution execution = 1;
+}
+
+message CheckReviewExistsRequest {
+  string tour_id = 1;
+  string tourist_id = 2;
+}
+
+message CheckReviewExistsResponse {
+  bool exists = 1;
+  string review_id = 2; 
+}
+
 service TourService {
     rpc CreateTour(CreateTourRequest) returns (CreateTourResponse) {
         option (google.api.http) = {
@@ -321,6 +340,18 @@ service TourService {
     rpc GetCompletionStatus(GetCompletionStatusRequest) returns (GetCompletionStatusResponse) {
       option (google.api.http) = {
         get: "/api/tour-execution/{execution_id}/completion-status"
+      };
+    }
+
+    rpc CheckReviewExists(CheckReviewExistsRequest) returns (CheckReviewExistsResponse) {
+      option (google.api.http) = {
+        get: "/api/reviews/{tour_id}/{tourist_id}/exists"
+      };
+    }
+
+    rpc GetTourExecutionByUserAndTour(GetTourExecutionByUserAndTourRequest) returns (GetTourExecutionByUserAndTourResponse) {
+      option (google.api.http) = {
+        get: "/api/tour-execution/tourist/{tourist_id}/tour/{tour_id}"
       };
     }
 }

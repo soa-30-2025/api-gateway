@@ -2335,6 +2335,206 @@ func (x *GetCompletionStatusResponse) GetProgress() string {
 	return ""
 }
 
+type GetTourExecutionByUserAndTourRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TouristId     string                 `protobuf:"bytes,1,opt,name=tourist_id,json=touristId,proto3" json:"tourist_id,omitempty"`
+	TourId        string                 `protobuf:"bytes,2,opt,name=tour_id,json=tourId,proto3" json:"tour_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTourExecutionByUserAndTourRequest) Reset() {
+	*x = GetTourExecutionByUserAndTourRequest{}
+	mi := &file_tour_tour_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTourExecutionByUserAndTourRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTourExecutionByUserAndTourRequest) ProtoMessage() {}
+
+func (x *GetTourExecutionByUserAndTourRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTourExecutionByUserAndTourRequest.ProtoReflect.Descriptor instead.
+func (*GetTourExecutionByUserAndTourRequest) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *GetTourExecutionByUserAndTourRequest) GetTouristId() string {
+	if x != nil {
+		return x.TouristId
+	}
+	return ""
+}
+
+func (x *GetTourExecutionByUserAndTourRequest) GetTourId() string {
+	if x != nil {
+		return x.TourId
+	}
+	return ""
+}
+
+type GetTourExecutionByUserAndTourResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Execution     *TourExecution         `protobuf:"bytes,1,opt,name=execution,proto3" json:"execution,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTourExecutionByUserAndTourResponse) Reset() {
+	*x = GetTourExecutionByUserAndTourResponse{}
+	mi := &file_tour_tour_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTourExecutionByUserAndTourResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTourExecutionByUserAndTourResponse) ProtoMessage() {}
+
+func (x *GetTourExecutionByUserAndTourResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTourExecutionByUserAndTourResponse.ProtoReflect.Descriptor instead.
+func (*GetTourExecutionByUserAndTourResponse) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *GetTourExecutionByUserAndTourResponse) GetExecution() *TourExecution {
+	if x != nil {
+		return x.Execution
+	}
+	return nil
+}
+
+type CheckReviewExistsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TourId        string                 `protobuf:"bytes,1,opt,name=tour_id,json=tourId,proto3" json:"tour_id,omitempty"`
+	TouristId     string                 `protobuf:"bytes,2,opt,name=tourist_id,json=touristId,proto3" json:"tourist_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckReviewExistsRequest) Reset() {
+	*x = CheckReviewExistsRequest{}
+	mi := &file_tour_tour_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckReviewExistsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckReviewExistsRequest) ProtoMessage() {}
+
+func (x *CheckReviewExistsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckReviewExistsRequest.ProtoReflect.Descriptor instead.
+func (*CheckReviewExistsRequest) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *CheckReviewExistsRequest) GetTourId() string {
+	if x != nil {
+		return x.TourId
+	}
+	return ""
+}
+
+func (x *CheckReviewExistsRequest) GetTouristId() string {
+	if x != nil {
+		return x.TouristId
+	}
+	return ""
+}
+
+type CheckReviewExistsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Exists        bool                   `protobuf:"varint,1,opt,name=exists,proto3" json:"exists,omitempty"`
+	ReviewId      string                 `protobuf:"bytes,2,opt,name=review_id,json=reviewId,proto3" json:"review_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckReviewExistsResponse) Reset() {
+	*x = CheckReviewExistsResponse{}
+	mi := &file_tour_tour_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckReviewExistsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckReviewExistsResponse) ProtoMessage() {}
+
+func (x *CheckReviewExistsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tour_tour_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckReviewExistsResponse.ProtoReflect.Descriptor instead.
+func (*CheckReviewExistsResponse) Descriptor() ([]byte, []int) {
+	return file_tour_tour_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *CheckReviewExistsResponse) GetExists() bool {
+	if x != nil {
+		return x.Exists
+	}
+	return false
+}
+
+func (x *CheckReviewExistsResponse) GetReviewId() string {
+	if x != nil {
+		return x.ReviewId
+	}
+	return ""
+}
+
 var File_tour_tour_proto protoreflect.FileDescriptor
 
 const file_tour_tour_proto_rawDesc = "" +
@@ -2538,7 +2738,20 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\x13completed_keypoints\x18\x01 \x01(\x05R\x12completedKeypoints\x12'\n" +
 	"\x0ftotal_keypoints\x18\x02 \x01(\x05R\x0etotalKeypoints\x12#\n" +
 	"\rall_completed\x18\x03 \x01(\bR\fallCompleted\x12\x1a\n" +
-	"\bprogress\x18\x04 \x01(\tR\bprogress2\xa4\x0e\n" +
+	"\bprogress\x18\x04 \x01(\tR\bprogress\"^\n" +
+	"$GetTourExecutionByUserAndTourRequest\x12\x1d\n" +
+	"\n" +
+	"tourist_id\x18\x01 \x01(\tR\ttouristId\x12\x17\n" +
+	"\atour_id\x18\x02 \x01(\tR\x06tourId\"Z\n" +
+	"%GetTourExecutionByUserAndTourResponse\x121\n" +
+	"\texecution\x18\x01 \x01(\v2\x13.tour.TourExecutionR\texecution\"R\n" +
+	"\x18CheckReviewExistsRequest\x12\x17\n" +
+	"\atour_id\x18\x01 \x01(\tR\x06tourId\x12\x1d\n" +
+	"\n" +
+	"tourist_id\x18\x02 \x01(\tR\ttouristId\"P\n" +
+	"\x19CheckReviewExistsResponse\x12\x16\n" +
+	"\x06exists\x18\x01 \x01(\bR\x06exists\x12\x1b\n" +
+	"\treview_id\x18\x02 \x01(\tR\breviewId2\xeb\x10\n" +
 	"\vTourService\x12U\n" +
 	"\n" +
 	"CreateTour\x12\x17.tour.CreateTourRequest\x1a\x18.tour.CreateTourResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/api/tour\x12q\n" +
@@ -2558,7 +2771,9 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\tStartTour\x12\x16.tour.StartTourRequest\x1a\x17.tour.StartTourResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/tour-execution\x12\x89\x01\n" +
 	"\x13UpdateTourExecution\x12 .tour.UpdateTourExecutionRequest\x1a!.tour.UpdateTourExecutionResponse\"-\x82\xd3\xe4\x93\x02':\x01*\x1a\"/api/tour-execution/{execution_id}\x12\x9f\x01\n" +
 	"\x16CheckKeypointProximity\x12#.tour.CheckKeypointProximityRequest\x1a$.tour.CheckKeypointProximityResponse\":\x82\xd3\xe4\x93\x024\x122/api/tour-execution/{execution_id}/check-proximity\x12\x98\x01\n" +
-	"\x13GetCompletionStatus\x12 .tour.GetCompletionStatusRequest\x1a!.tour.GetCompletionStatusResponse\"<\x82\xd3\xe4\x93\x026\x124/api/tour-execution/{execution_id}/completion-statusB\fZ\n" +
+	"\x13GetCompletionStatus\x12 .tour.GetCompletionStatusRequest\x1a!.tour.GetCompletionStatusResponse\"<\x82\xd3\xe4\x93\x026\x124/api/tour-execution/{execution_id}/completion-status\x12\x88\x01\n" +
+	"\x11CheckReviewExists\x12\x1e.tour.CheckReviewExistsRequest\x1a\x1f.tour.CheckReviewExistsResponse\"2\x82\xd3\xe4\x93\x02,\x12*/api/reviews/{tour_id}/{tourist_id}/exists\x12\xb9\x01\n" +
+	"\x1dGetTourExecutionByUserAndTour\x12*.tour.GetTourExecutionByUserAndTourRequest\x1a+.tour.GetTourExecutionByUserAndTourResponse\"?\x82\xd3\xe4\x93\x029\x127/api/tour-execution/tourist/{tourist_id}/tour/{tour_id}B\fZ\n" +
 	"proto/tourb\x06proto3"
 
 var (
@@ -2573,50 +2788,54 @@ func file_tour_tour_proto_rawDescGZIP() []byte {
 	return file_tour_tour_proto_rawDescData
 }
 
-var file_tour_tour_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
+var file_tour_tour_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
 var file_tour_tour_proto_goTypes = []any{
-	(*Tour)(nil),                           // 0: tour.Tour
-	(*Keypoint)(nil),                       // 1: tour.Keypoint
-	(*Review)(nil),                         // 2: tour.Review
-	(*TourExecution)(nil),                  // 3: tour.TourExecution
-	(*CompletedKeyPoint)(nil),              // 4: tour.CompletedKeyPoint
-	(*StartTourRequest)(nil),               // 5: tour.StartTourRequest
-	(*StartTourResponse)(nil),              // 6: tour.StartTourResponse
-	(*UpdateTourExecutionRequest)(nil),     // 7: tour.UpdateTourExecutionRequest
-	(*UpdateTourExecutionResponse)(nil),    // 8: tour.UpdateTourExecutionResponse
-	(*CheckKeypointProximityRequest)(nil),  // 9: tour.CheckKeypointProximityRequest
-	(*CheckKeypointProximityResponse)(nil), // 10: tour.CheckKeypointProximityResponse
-	(*CreateTourRequest)(nil),              // 11: tour.CreateTourRequest
-	(*CreateTourResponse)(nil),             // 12: tour.CreateTourResponse
-	(*GetToursByAuthorRequest)(nil),        // 13: tour.GetToursByAuthorRequest
-	(*GetToursByAuthorResponse)(nil),       // 14: tour.GetToursByAuthorResponse
-	(*GetTourRequest)(nil),                 // 15: tour.GetTourRequest
-	(*GetTourResponse)(nil),                // 16: tour.GetTourResponse
-	(*GetAllToursRequest)(nil),             // 17: tour.GetAllToursRequest
-	(*GetAllToursResponse)(nil),            // 18: tour.GetAllToursResponse
-	(*CreateReviewRequest)(nil),            // 19: tour.CreateReviewRequest
-	(*Image)(nil),                          // 20: tour.Image
-	(*CreateReviewResponse)(nil),           // 21: tour.CreateReviewResponse
-	(*GetReviewsByTourRequest)(nil),        // 22: tour.GetReviewsByTourRequest
-	(*GetReviewsByTourResponse)(nil),       // 23: tour.GetReviewsByTourResponse
-	(*UpdateTourRequest)(nil),              // 24: tour.UpdateTourRequest
-	(*UpdateTourResponse)(nil),             // 25: tour.UpdateTourResponse
-	(*AddKeypointRequest)(nil),             // 26: tour.AddKeypointRequest
-	(*AddKeypointResponse)(nil),            // 27: tour.AddKeypointResponse
-	(*GetKeypointImageRequest)(nil),        // 28: tour.GetKeypointImageRequest
-	(*ImageChunk)(nil),                     // 29: tour.ImageChunk
-	(*ReorderKeypointsRequest)(nil),        // 30: tour.ReorderKeypointsRequest
-	(*ReorderKeypointsResponse)(nil),       // 31: tour.ReorderKeypointsResponse
-	(*UpdateKeypointRequest)(nil),          // 32: tour.UpdateKeypointRequest
-	(*UpdateKeypointResponse)(nil),         // 33: tour.UpdateKeypointResponse
-	(*DeleteKeypointRequest)(nil),          // 34: tour.DeleteKeypointRequest
-	(*DeleteKeypointResponse)(nil),         // 35: tour.DeleteKeypointResponse
-	(*GetCompletionStatusRequest)(nil),     // 36: tour.GetCompletionStatusRequest
-	(*GetCompletionStatusResponse)(nil),    // 37: tour.GetCompletionStatusResponse
-	nil,                                    // 38: tour.Tour.TravelTimesEntry
-	nil,                                    // 39: tour.CreateTourRequest.TravelTimesEntry
-	nil,                                    // 40: tour.UpdateTourRequest.TravelTimesEntry
-	(*timestamppb.Timestamp)(nil),          // 41: google.protobuf.Timestamp
+	(*Tour)(nil),                                  // 0: tour.Tour
+	(*Keypoint)(nil),                              // 1: tour.Keypoint
+	(*Review)(nil),                                // 2: tour.Review
+	(*TourExecution)(nil),                         // 3: tour.TourExecution
+	(*CompletedKeyPoint)(nil),                     // 4: tour.CompletedKeyPoint
+	(*StartTourRequest)(nil),                      // 5: tour.StartTourRequest
+	(*StartTourResponse)(nil),                     // 6: tour.StartTourResponse
+	(*UpdateTourExecutionRequest)(nil),            // 7: tour.UpdateTourExecutionRequest
+	(*UpdateTourExecutionResponse)(nil),           // 8: tour.UpdateTourExecutionResponse
+	(*CheckKeypointProximityRequest)(nil),         // 9: tour.CheckKeypointProximityRequest
+	(*CheckKeypointProximityResponse)(nil),        // 10: tour.CheckKeypointProximityResponse
+	(*CreateTourRequest)(nil),                     // 11: tour.CreateTourRequest
+	(*CreateTourResponse)(nil),                    // 12: tour.CreateTourResponse
+	(*GetToursByAuthorRequest)(nil),               // 13: tour.GetToursByAuthorRequest
+	(*GetToursByAuthorResponse)(nil),              // 14: tour.GetToursByAuthorResponse
+	(*GetTourRequest)(nil),                        // 15: tour.GetTourRequest
+	(*GetTourResponse)(nil),                       // 16: tour.GetTourResponse
+	(*GetAllToursRequest)(nil),                    // 17: tour.GetAllToursRequest
+	(*GetAllToursResponse)(nil),                   // 18: tour.GetAllToursResponse
+	(*CreateReviewRequest)(nil),                   // 19: tour.CreateReviewRequest
+	(*Image)(nil),                                 // 20: tour.Image
+	(*CreateReviewResponse)(nil),                  // 21: tour.CreateReviewResponse
+	(*GetReviewsByTourRequest)(nil),               // 22: tour.GetReviewsByTourRequest
+	(*GetReviewsByTourResponse)(nil),              // 23: tour.GetReviewsByTourResponse
+	(*UpdateTourRequest)(nil),                     // 24: tour.UpdateTourRequest
+	(*UpdateTourResponse)(nil),                    // 25: tour.UpdateTourResponse
+	(*AddKeypointRequest)(nil),                    // 26: tour.AddKeypointRequest
+	(*AddKeypointResponse)(nil),                   // 27: tour.AddKeypointResponse
+	(*GetKeypointImageRequest)(nil),               // 28: tour.GetKeypointImageRequest
+	(*ImageChunk)(nil),                            // 29: tour.ImageChunk
+	(*ReorderKeypointsRequest)(nil),               // 30: tour.ReorderKeypointsRequest
+	(*ReorderKeypointsResponse)(nil),              // 31: tour.ReorderKeypointsResponse
+	(*UpdateKeypointRequest)(nil),                 // 32: tour.UpdateKeypointRequest
+	(*UpdateKeypointResponse)(nil),                // 33: tour.UpdateKeypointResponse
+	(*DeleteKeypointRequest)(nil),                 // 34: tour.DeleteKeypointRequest
+	(*DeleteKeypointResponse)(nil),                // 35: tour.DeleteKeypointResponse
+	(*GetCompletionStatusRequest)(nil),            // 36: tour.GetCompletionStatusRequest
+	(*GetCompletionStatusResponse)(nil),           // 37: tour.GetCompletionStatusResponse
+	(*GetTourExecutionByUserAndTourRequest)(nil),  // 38: tour.GetTourExecutionByUserAndTourRequest
+	(*GetTourExecutionByUserAndTourResponse)(nil), // 39: tour.GetTourExecutionByUserAndTourResponse
+	(*CheckReviewExistsRequest)(nil),              // 40: tour.CheckReviewExistsRequest
+	(*CheckReviewExistsResponse)(nil),             // 41: tour.CheckReviewExistsResponse
+	nil,                                           // 42: tour.Tour.TravelTimesEntry
+	nil,                                           // 43: tour.CreateTourRequest.TravelTimesEntry
+	nil,                                           // 44: tour.UpdateTourRequest.TravelTimesEntry
+	(*timestamppb.Timestamp)(nil),                 // 45: google.protobuf.Timestamp
 }
 var file_tour_tour_proto_depIdxs = []int32{
 	38, // 0: tour.Tour.travel_times:type_name -> tour.Tour.TravelTimesEntry
@@ -2697,7 +2916,7 @@ func file_tour_tour_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tour_tour_proto_rawDesc), len(file_tour_tour_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   41,
+			NumMessages:   45,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
