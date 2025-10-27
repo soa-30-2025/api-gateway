@@ -625,6 +625,116 @@ func local_request_TourService_GetCompletionStatus_0(ctx context.Context, marsha
 	return msg, metadata, err
 }
 
+func request_TourService_CheckReviewExists_0(ctx context.Context, marshaler runtime.Marshaler, client TourServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq CheckReviewExistsRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	val, ok := pathParams["tour_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "tour_id")
+	}
+	protoReq.TourId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "tour_id", err)
+	}
+	val, ok = pathParams["tourist_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "tourist_id")
+	}
+	protoReq.TouristId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "tourist_id", err)
+	}
+	msg, err := client.CheckReviewExists(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_TourService_CheckReviewExists_0(ctx context.Context, marshaler runtime.Marshaler, server TourServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq CheckReviewExistsRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["tour_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "tour_id")
+	}
+	protoReq.TourId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "tour_id", err)
+	}
+	val, ok = pathParams["tourist_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "tourist_id")
+	}
+	protoReq.TouristId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "tourist_id", err)
+	}
+	msg, err := server.CheckReviewExists(ctx, &protoReq)
+	return msg, metadata, err
+}
+
+func request_TourService_GetTourExecutionByUserAndTour_0(ctx context.Context, marshaler runtime.Marshaler, client TourServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetTourExecutionByUserAndTourRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	val, ok := pathParams["tourist_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "tourist_id")
+	}
+	protoReq.TouristId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "tourist_id", err)
+	}
+	val, ok = pathParams["tour_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "tour_id")
+	}
+	protoReq.TourId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "tour_id", err)
+	}
+	msg, err := client.GetTourExecutionByUserAndTour(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_TourService_GetTourExecutionByUserAndTour_0(ctx context.Context, marshaler runtime.Marshaler, server TourServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetTourExecutionByUserAndTourRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["tourist_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "tourist_id")
+	}
+	protoReq.TouristId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "tourist_id", err)
+	}
+	val, ok = pathParams["tour_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "tour_id")
+	}
+	protoReq.TourId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "tour_id", err)
+	}
+	msg, err := server.GetTourExecutionByUserAndTour(ctx, &protoReq)
+	return msg, metadata, err
+}
+
 // RegisterTourServiceHandlerServer registers the http handlers for service TourService to "mux".
 // UnaryRPC     :call TourServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -938,6 +1048,46 @@ func RegisterTourServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		}
 		forward_TourService_GetCompletionStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodGet, pattern_TourService_CheckReviewExists_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/tour.TourService/CheckReviewExists", runtime.WithHTTPPathPattern("/api/reviews/{tour_id}/{tourist_id}/exists"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_TourService_CheckReviewExists_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_TourService_CheckReviewExists_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodGet, pattern_TourService_GetTourExecutionByUserAndTour_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/tour.TourService/GetTourExecutionByUserAndTour", runtime.WithHTTPPathPattern("/api/tour-execution/tourist/{tourist_id}/tour/{tour_id}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_TourService_GetTourExecutionByUserAndTour_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_TourService_GetTourExecutionByUserAndTour_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 
 	return nil
 }
@@ -1250,43 +1400,81 @@ func RegisterTourServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		}
 		forward_TourService_GetCompletionStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodGet, pattern_TourService_CheckReviewExists_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/tour.TourService/CheckReviewExists", runtime.WithHTTPPathPattern("/api/reviews/{tour_id}/{tourist_id}/exists"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_TourService_CheckReviewExists_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_TourService_CheckReviewExists_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodGet, pattern_TourService_GetTourExecutionByUserAndTour_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/tour.TourService/GetTourExecutionByUserAndTour", runtime.WithHTTPPathPattern("/api/tour-execution/tourist/{tourist_id}/tour/{tour_id}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_TourService_GetTourExecutionByUserAndTour_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_TourService_GetTourExecutionByUserAndTour_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	return nil
 }
 
 var (
-	pattern_TourService_CreateTour_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "tour"}, ""))
-	pattern_TourService_GetToursByAuthor_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "tours", "author_id"}, ""))
-	pattern_TourService_GetTour_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "tour", "id"}, ""))
-	pattern_TourService_GetAllTours_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "tours"}, ""))
-	pattern_TourService_CreateReview_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "review"}, ""))
-	pattern_TourService_UpdateTour_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "tour", "id"}, ""))
-	pattern_TourService_GetReviewsByTour_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "reviews", "tourId"}, ""))
-	pattern_TourService_AddKeypoint_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"api", "tour", "tour_id", "keypoints"}, ""))
-	pattern_TourService_GetKeypointImage_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"api", "keypoints", "keypoint_id", "image"}, ""))
-	pattern_TourService_ReorderKeypoints_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4}, []string{"api", "tours", "tour_id", "keypoints", "reorder"}, ""))
-	pattern_TourService_UpdateKeypoint_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "keypoints", "keypoint_id"}, ""))
-	pattern_TourService_DeleteKeypoint_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "keypoints", "keypoint_id"}, ""))
-	pattern_TourService_StartTour_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "tour-execution"}, ""))
-	pattern_TourService_UpdateTourExecution_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "tour-execution", "execution_id"}, ""))
-	pattern_TourService_CheckKeypointProximity_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"api", "tour-execution", "execution_id", "check-proximity"}, ""))
-	pattern_TourService_GetCompletionStatus_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"api", "tour-execution", "execution_id", "completion-status"}, ""))
+	pattern_TourService_CreateTour_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "tour"}, ""))
+	pattern_TourService_GetToursByAuthor_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "tours", "author_id"}, ""))
+	pattern_TourService_GetTour_0                       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "tour", "id"}, ""))
+	pattern_TourService_GetAllTours_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "tours"}, ""))
+	pattern_TourService_CreateReview_0                  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "review"}, ""))
+	pattern_TourService_UpdateTour_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "tour", "id"}, ""))
+	pattern_TourService_GetReviewsByTour_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "reviews", "tourId"}, ""))
+	pattern_TourService_AddKeypoint_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"api", "tour", "tour_id", "keypoints"}, ""))
+	pattern_TourService_GetKeypointImage_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"api", "keypoints", "keypoint_id", "image"}, ""))
+	pattern_TourService_ReorderKeypoints_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4}, []string{"api", "tours", "tour_id", "keypoints", "reorder"}, ""))
+	pattern_TourService_UpdateKeypoint_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "keypoints", "keypoint_id"}, ""))
+	pattern_TourService_DeleteKeypoint_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "keypoints", "keypoint_id"}, ""))
+	pattern_TourService_StartTour_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"api", "tour-execution"}, ""))
+	pattern_TourService_UpdateTourExecution_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"api", "tour-execution", "execution_id"}, ""))
+	pattern_TourService_CheckKeypointProximity_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"api", "tour-execution", "execution_id", "check-proximity"}, ""))
+	pattern_TourService_GetCompletionStatus_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"api", "tour-execution", "execution_id", "completion-status"}, ""))
+	pattern_TourService_CheckReviewExists_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"api", "reviews", "tour_id", "tourist_id", "exists"}, ""))
+	pattern_TourService_GetTourExecutionByUserAndTour_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"api", "tour-execution", "tourist", "tourist_id", "tour", "tour_id"}, ""))
 )
 
 var (
-	forward_TourService_CreateTour_0             = runtime.ForwardResponseMessage
-	forward_TourService_GetToursByAuthor_0       = runtime.ForwardResponseMessage
-	forward_TourService_GetTour_0                = runtime.ForwardResponseMessage
-	forward_TourService_GetAllTours_0            = runtime.ForwardResponseMessage
-	forward_TourService_CreateReview_0           = runtime.ForwardResponseMessage
-	forward_TourService_UpdateTour_0             = runtime.ForwardResponseMessage
-	forward_TourService_GetReviewsByTour_0       = runtime.ForwardResponseMessage
-	forward_TourService_AddKeypoint_0            = runtime.ForwardResponseMessage
-	forward_TourService_GetKeypointImage_0       = runtime.ForwardResponseStream
-	forward_TourService_ReorderKeypoints_0       = runtime.ForwardResponseMessage
-	forward_TourService_UpdateKeypoint_0         = runtime.ForwardResponseMessage
-	forward_TourService_DeleteKeypoint_0         = runtime.ForwardResponseMessage
-	forward_TourService_StartTour_0              = runtime.ForwardResponseMessage
-	forward_TourService_UpdateTourExecution_0    = runtime.ForwardResponseMessage
-	forward_TourService_CheckKeypointProximity_0 = runtime.ForwardResponseMessage
-	forward_TourService_GetCompletionStatus_0    = runtime.ForwardResponseMessage
+	forward_TourService_CreateTour_0                    = runtime.ForwardResponseMessage
+	forward_TourService_GetToursByAuthor_0              = runtime.ForwardResponseMessage
+	forward_TourService_GetTour_0                       = runtime.ForwardResponseMessage
+	forward_TourService_GetAllTours_0                   = runtime.ForwardResponseMessage
+	forward_TourService_CreateReview_0                  = runtime.ForwardResponseMessage
+	forward_TourService_UpdateTour_0                    = runtime.ForwardResponseMessage
+	forward_TourService_GetReviewsByTour_0              = runtime.ForwardResponseMessage
+	forward_TourService_AddKeypoint_0                   = runtime.ForwardResponseMessage
+	forward_TourService_GetKeypointImage_0              = runtime.ForwardResponseStream
+	forward_TourService_ReorderKeypoints_0              = runtime.ForwardResponseMessage
+	forward_TourService_UpdateKeypoint_0                = runtime.ForwardResponseMessage
+	forward_TourService_DeleteKeypoint_0                = runtime.ForwardResponseMessage
+	forward_TourService_StartTour_0                     = runtime.ForwardResponseMessage
+	forward_TourService_UpdateTourExecution_0           = runtime.ForwardResponseMessage
+	forward_TourService_CheckKeypointProximity_0        = runtime.ForwardResponseMessage
+	forward_TourService_GetCompletionStatus_0           = runtime.ForwardResponseMessage
+	forward_TourService_CheckReviewExists_0             = runtime.ForwardResponseMessage
+	forward_TourService_GetTourExecutionByUserAndTour_0 = runtime.ForwardResponseMessage
 )
