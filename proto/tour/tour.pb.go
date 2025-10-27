@@ -36,9 +36,10 @@ type Tour struct {
 	Status        string                 `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
 	TravelTimes   map[string]int32       `protobuf:"bytes,10,rep,name=travel_times,json=travelTimes,proto3" json:"travel_times,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string                 `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	PublishedAt   string                 `protobuf:"bytes,13,opt,name=published_at,json=publishedAt,proto3" json:"published_at,omitempty"`
-	ArchivedAt    string                 `protobuf:"bytes,14,opt,name=archived_at,json=archivedAt,proto3" json:"archived_at,omitempty"`
+	DepartureDate *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=departure_date,json=departureDate,proto3" json:"departure_date,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	PublishedAt   string                 `protobuf:"bytes,14,opt,name=published_at,json=publishedAt,proto3" json:"published_at,omitempty"`
+	ArchivedAt    string                 `protobuf:"bytes,15,opt,name=archived_at,json=archivedAt,proto3" json:"archived_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -146,6 +147,13 @@ func (x *Tour) GetTravelTimes() map[string]int32 {
 func (x *Tour) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *Tour) GetDepartureDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DepartureDate
 	}
 	return nil
 }
@@ -850,6 +858,8 @@ type CreateTourRequest struct {
 	Difficulty    string                 `protobuf:"bytes,3,opt,name=difficulty,proto3" json:"difficulty,omitempty"`
 	Tags          []string               `protobuf:"bytes,4,rep,name=tags,proto3" json:"tags,omitempty"`
 	TravelTimes   map[string]int32       `protobuf:"bytes,5,rep,name=travel_times,json=travelTimes,proto3" json:"travel_times,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	Price         float64                `protobuf:"fixed64,6,opt,name=price,proto3" json:"price,omitempty"`
+	DepartureDate *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=departure_date,json=departureDate,proto3" json:"departure_date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -915,6 +925,20 @@ func (x *CreateTourRequest) GetTags() []string {
 func (x *CreateTourRequest) GetTravelTimes() map[string]int32 {
 	if x != nil {
 		return x.TravelTimes
+	}
+	return nil
+}
+
+func (x *CreateTourRequest) GetPrice() float64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+func (x *CreateTourRequest) GetDepartureDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DepartureDate
 	}
 	return nil
 }
@@ -1505,6 +1529,8 @@ type UpdateTourRequest struct {
 	TravelTimes   map[string]int32       `protobuf:"bytes,6,rep,name=travel_times,json=travelTimes,proto3" json:"travel_times,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
 	LengthKm      float64                `protobuf:"fixed64,7,opt,name=length_km,json=lengthKm,proto3" json:"length_km,omitempty"`
 	Status        string                 `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
+	Price         float64                `protobuf:"fixed64,9,opt,name=price,proto3" json:"price,omitempty"`
+	DepartureDate *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=departure_date,json=departureDate,proto3" json:"departure_date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1593,6 +1619,20 @@ func (x *UpdateTourRequest) GetStatus() string {
 		return x.Status
 	}
 	return ""
+}
+
+func (x *UpdateTourRequest) GetPrice() float64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+func (x *UpdateTourRequest) GetDepartureDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DepartureDate
+	}
+	return nil
 }
 
 type UpdateTourResponse struct {
@@ -2299,7 +2339,7 @@ var File_tour_tour_proto protoreflect.FileDescriptor
 
 const file_tour_tour_proto_rawDesc = "" +
 	"\n" +
-	"\x0ftour/tour.proto\x12\x04tour\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\x86\x04\n" +
+	"\x0ftour/tour.proto\x12\x04tour\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\xc9\x04\n" +
 	"\x04Tour\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tauthor_id\x18\x02 \x01(\tR\bauthorId\x12\x12\n" +
@@ -2315,11 +2355,12 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\ftravel_times\x18\n" +
 	" \x03(\v2\x1b.tour.Tour.TravelTimesEntryR\vtravelTimes\x129\n" +
 	"\n" +
-	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12A\n" +
+	"\x0edeparture_date\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\rdepartureDate\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\f \x01(\tR\tupdatedAt\x12!\n" +
-	"\fpublished_at\x18\r \x01(\tR\vpublishedAt\x12\x1f\n" +
-	"\varchived_at\x18\x0e \x01(\tR\n" +
+	"updated_at\x18\r \x01(\tR\tupdatedAt\x12!\n" +
+	"\fpublished_at\x18\x0e \x01(\tR\vpublishedAt\x12\x1f\n" +
+	"\varchived_at\x18\x0f \x01(\tR\n" +
 	"archivedAt\x1a>\n" +
 	"\x10TravelTimesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -2392,7 +2433,9 @@ const file_tour_tour_proto_rawDesc = "" +
 	"difficulty\x18\x03 \x01(\tR\n" +
 	"difficulty\x12\x12\n" +
 	"\x04tags\x18\x04 \x03(\tR\x04tags\x12K\n" +
-	"\ftravel_times\x18\x05 \x03(\v2(.tour.CreateTourRequest.TravelTimesEntryR\vtravelTimes\x1a>\n" +
+	"\ftravel_times\x18\x05 \x03(\v2(.tour.CreateTourRequest.TravelTimesEntryR\vtravelTimes\x12\x14\n" +
+	"\x05price\x18\x06 \x01(\x01R\x05price\x12A\n" +
+	"\x0edeparture_date\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\rdepartureDate\x1a>\n" +
 	"\x10TravelTimesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"4\n" +
@@ -2430,7 +2473,7 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\x17GetReviewsByTourRequest\x12\x16\n" +
 	"\x06tourId\x18\x01 \x01(\tR\x06tourId\"B\n" +
 	"\x18GetReviewsByTourResponse\x12&\n" +
-	"\areviews\x18\x01 \x03(\v2\f.tour.ReviewR\areviews\"\xcf\x02\n" +
+	"\areviews\x18\x01 \x03(\v2\f.tour.ReviewR\areviews\"\xa8\x03\n" +
 	"\x11UpdateTourRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -2441,7 +2484,10 @@ const file_tour_tour_proto_rawDesc = "" +
 	"\x04tags\x18\x05 \x03(\tR\x04tags\x12K\n" +
 	"\ftravel_times\x18\x06 \x03(\v2(.tour.UpdateTourRequest.TravelTimesEntryR\vtravelTimes\x12\x1b\n" +
 	"\tlength_km\x18\a \x01(\x01R\blengthKm\x12\x16\n" +
-	"\x06status\x18\b \x01(\tR\x06status\x1a>\n" +
+	"\x06status\x18\b \x01(\tR\x06status\x12\x14\n" +
+	"\x05price\x18\t \x01(\x01R\x05price\x12A\n" +
+	"\x0edeparture_date\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\rdepartureDate\x1a>\n" +
 	"\x10TravelTimesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"4\n" +
