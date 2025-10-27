@@ -2838,71 +2838,76 @@ var file_tour_tour_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),                 // 45: google.protobuf.Timestamp
 }
 var file_tour_tour_proto_depIdxs = []int32{
-	38, // 0: tour.Tour.travel_times:type_name -> tour.Tour.TravelTimesEntry
-	41, // 1: tour.Tour.created_at:type_name -> google.protobuf.Timestamp
-	41, // 2: tour.Tour.departure_date:type_name -> google.protobuf.Timestamp
-	41, // 3: tour.Review.visit_date:type_name -> google.protobuf.Timestamp
-	41, // 4: tour.Review.created_at:type_name -> google.protobuf.Timestamp
+	42, // 0: tour.Tour.travel_times:type_name -> tour.Tour.TravelTimesEntry
+	45, // 1: tour.Tour.created_at:type_name -> google.protobuf.Timestamp
+	45, // 2: tour.Tour.departure_date:type_name -> google.protobuf.Timestamp
+	45, // 3: tour.Review.visit_date:type_name -> google.protobuf.Timestamp
+	45, // 4: tour.Review.created_at:type_name -> google.protobuf.Timestamp
 	4,  // 5: tour.TourExecution.completed_key_points:type_name -> tour.CompletedKeyPoint
-	41, // 6: tour.TourExecution.start_time:type_name -> google.protobuf.Timestamp
-	41, // 7: tour.TourExecution.end_time:type_name -> google.protobuf.Timestamp
-	41, // 8: tour.TourExecution.last_activity:type_name -> google.protobuf.Timestamp
-	41, // 9: tour.CompletedKeyPoint.completed_time:type_name -> google.protobuf.Timestamp
+	45, // 6: tour.TourExecution.start_time:type_name -> google.protobuf.Timestamp
+	45, // 7: tour.TourExecution.end_time:type_name -> google.protobuf.Timestamp
+	45, // 8: tour.TourExecution.last_activity:type_name -> google.protobuf.Timestamp
+	45, // 9: tour.CompletedKeyPoint.completed_time:type_name -> google.protobuf.Timestamp
 	3,  // 10: tour.StartTourResponse.execution:type_name -> tour.TourExecution
 	3,  // 11: tour.UpdateTourExecutionResponse.execution:type_name -> tour.TourExecution
-	39, // 12: tour.CreateTourRequest.travel_times:type_name -> tour.CreateTourRequest.TravelTimesEntry
-	41, // 13: tour.CreateTourRequest.departure_date:type_name -> google.protobuf.Timestamp
+	43, // 12: tour.CreateTourRequest.travel_times:type_name -> tour.CreateTourRequest.TravelTimesEntry
+	45, // 13: tour.CreateTourRequest.departure_date:type_name -> google.protobuf.Timestamp
 	0,  // 14: tour.CreateTourResponse.tour:type_name -> tour.Tour
 	0,  // 15: tour.GetToursByAuthorResponse.tours:type_name -> tour.Tour
 	0,  // 16: tour.GetTourResponse.tour:type_name -> tour.Tour
 	1,  // 17: tour.GetTourResponse.keypoints:type_name -> tour.Keypoint
 	0,  // 18: tour.GetAllToursResponse.tours:type_name -> tour.Tour
-	41, // 19: tour.CreateReviewRequest.visit_date:type_name -> google.protobuf.Timestamp
+	45, // 19: tour.CreateReviewRequest.visit_date:type_name -> google.protobuf.Timestamp
 	20, // 20: tour.CreateReviewRequest.images:type_name -> tour.Image
 	2,  // 21: tour.CreateReviewResponse.review:type_name -> tour.Review
 	2,  // 22: tour.GetReviewsByTourResponse.reviews:type_name -> tour.Review
-	40, // 23: tour.UpdateTourRequest.travel_times:type_name -> tour.UpdateTourRequest.TravelTimesEntry
-	41, // 24: tour.UpdateTourRequest.departure_date:type_name -> google.protobuf.Timestamp
+	44, // 23: tour.UpdateTourRequest.travel_times:type_name -> tour.UpdateTourRequest.TravelTimesEntry
+	45, // 24: tour.UpdateTourRequest.departure_date:type_name -> google.protobuf.Timestamp
 	0,  // 25: tour.UpdateTourResponse.tour:type_name -> tour.Tour
 	1,  // 26: tour.AddKeypointResponse.keypoint:type_name -> tour.Keypoint
 	1,  // 27: tour.UpdateKeypointResponse.keypoint:type_name -> tour.Keypoint
-	11, // 28: tour.TourService.CreateTour:input_type -> tour.CreateTourRequest
-	13, // 29: tour.TourService.GetToursByAuthor:input_type -> tour.GetToursByAuthorRequest
-	15, // 30: tour.TourService.GetTour:input_type -> tour.GetTourRequest
-	17, // 31: tour.TourService.GetAllTours:input_type -> tour.GetAllToursRequest
-	19, // 32: tour.TourService.CreateReview:input_type -> tour.CreateReviewRequest
-	24, // 33: tour.TourService.UpdateTour:input_type -> tour.UpdateTourRequest
-	22, // 34: tour.TourService.GetReviewsByTour:input_type -> tour.GetReviewsByTourRequest
-	26, // 35: tour.TourService.AddKeypoint:input_type -> tour.AddKeypointRequest
-	28, // 36: tour.TourService.GetKeypointImage:input_type -> tour.GetKeypointImageRequest
-	30, // 37: tour.TourService.ReorderKeypoints:input_type -> tour.ReorderKeypointsRequest
-	32, // 38: tour.TourService.UpdateKeypoint:input_type -> tour.UpdateKeypointRequest
-	34, // 39: tour.TourService.DeleteKeypoint:input_type -> tour.DeleteKeypointRequest
-	5,  // 40: tour.TourService.StartTour:input_type -> tour.StartTourRequest
-	7,  // 41: tour.TourService.UpdateTourExecution:input_type -> tour.UpdateTourExecutionRequest
-	9,  // 42: tour.TourService.CheckKeypointProximity:input_type -> tour.CheckKeypointProximityRequest
-	36, // 43: tour.TourService.GetCompletionStatus:input_type -> tour.GetCompletionStatusRequest
-	12, // 44: tour.TourService.CreateTour:output_type -> tour.CreateTourResponse
-	14, // 45: tour.TourService.GetToursByAuthor:output_type -> tour.GetToursByAuthorResponse
-	16, // 46: tour.TourService.GetTour:output_type -> tour.GetTourResponse
-	18, // 47: tour.TourService.GetAllTours:output_type -> tour.GetAllToursResponse
-	21, // 48: tour.TourService.CreateReview:output_type -> tour.CreateReviewResponse
-	25, // 49: tour.TourService.UpdateTour:output_type -> tour.UpdateTourResponse
-	23, // 50: tour.TourService.GetReviewsByTour:output_type -> tour.GetReviewsByTourResponse
-	27, // 51: tour.TourService.AddKeypoint:output_type -> tour.AddKeypointResponse
-	29, // 52: tour.TourService.GetKeypointImage:output_type -> tour.ImageChunk
-	31, // 53: tour.TourService.ReorderKeypoints:output_type -> tour.ReorderKeypointsResponse
-	33, // 54: tour.TourService.UpdateKeypoint:output_type -> tour.UpdateKeypointResponse
-	35, // 55: tour.TourService.DeleteKeypoint:output_type -> tour.DeleteKeypointResponse
-	6,  // 56: tour.TourService.StartTour:output_type -> tour.StartTourResponse
-	8,  // 57: tour.TourService.UpdateTourExecution:output_type -> tour.UpdateTourExecutionResponse
-	10, // 58: tour.TourService.CheckKeypointProximity:output_type -> tour.CheckKeypointProximityResponse
-	37, // 59: tour.TourService.GetCompletionStatus:output_type -> tour.GetCompletionStatusResponse
-	44, // [44:60] is the sub-list for method output_type
-	28, // [28:44] is the sub-list for method input_type
-	28, // [28:28] is the sub-list for extension type_name
-	28, // [28:28] is the sub-list for extension extendee
-	0,  // [0:28] is the sub-list for field type_name
+	3,  // 28: tour.GetTourExecutionByUserAndTourResponse.execution:type_name -> tour.TourExecution
+	11, // 29: tour.TourService.CreateTour:input_type -> tour.CreateTourRequest
+	13, // 30: tour.TourService.GetToursByAuthor:input_type -> tour.GetToursByAuthorRequest
+	15, // 31: tour.TourService.GetTour:input_type -> tour.GetTourRequest
+	17, // 32: tour.TourService.GetAllTours:input_type -> tour.GetAllToursRequest
+	19, // 33: tour.TourService.CreateReview:input_type -> tour.CreateReviewRequest
+	24, // 34: tour.TourService.UpdateTour:input_type -> tour.UpdateTourRequest
+	22, // 35: tour.TourService.GetReviewsByTour:input_type -> tour.GetReviewsByTourRequest
+	26, // 36: tour.TourService.AddKeypoint:input_type -> tour.AddKeypointRequest
+	28, // 37: tour.TourService.GetKeypointImage:input_type -> tour.GetKeypointImageRequest
+	30, // 38: tour.TourService.ReorderKeypoints:input_type -> tour.ReorderKeypointsRequest
+	32, // 39: tour.TourService.UpdateKeypoint:input_type -> tour.UpdateKeypointRequest
+	34, // 40: tour.TourService.DeleteKeypoint:input_type -> tour.DeleteKeypointRequest
+	5,  // 41: tour.TourService.StartTour:input_type -> tour.StartTourRequest
+	7,  // 42: tour.TourService.UpdateTourExecution:input_type -> tour.UpdateTourExecutionRequest
+	9,  // 43: tour.TourService.CheckKeypointProximity:input_type -> tour.CheckKeypointProximityRequest
+	36, // 44: tour.TourService.GetCompletionStatus:input_type -> tour.GetCompletionStatusRequest
+	40, // 45: tour.TourService.CheckReviewExists:input_type -> tour.CheckReviewExistsRequest
+	38, // 46: tour.TourService.GetTourExecutionByUserAndTour:input_type -> tour.GetTourExecutionByUserAndTourRequest
+	12, // 47: tour.TourService.CreateTour:output_type -> tour.CreateTourResponse
+	14, // 48: tour.TourService.GetToursByAuthor:output_type -> tour.GetToursByAuthorResponse
+	16, // 49: tour.TourService.GetTour:output_type -> tour.GetTourResponse
+	18, // 50: tour.TourService.GetAllTours:output_type -> tour.GetAllToursResponse
+	21, // 51: tour.TourService.CreateReview:output_type -> tour.CreateReviewResponse
+	25, // 52: tour.TourService.UpdateTour:output_type -> tour.UpdateTourResponse
+	23, // 53: tour.TourService.GetReviewsByTour:output_type -> tour.GetReviewsByTourResponse
+	27, // 54: tour.TourService.AddKeypoint:output_type -> tour.AddKeypointResponse
+	29, // 55: tour.TourService.GetKeypointImage:output_type -> tour.ImageChunk
+	31, // 56: tour.TourService.ReorderKeypoints:output_type -> tour.ReorderKeypointsResponse
+	33, // 57: tour.TourService.UpdateKeypoint:output_type -> tour.UpdateKeypointResponse
+	35, // 58: tour.TourService.DeleteKeypoint:output_type -> tour.DeleteKeypointResponse
+	6,  // 59: tour.TourService.StartTour:output_type -> tour.StartTourResponse
+	8,  // 60: tour.TourService.UpdateTourExecution:output_type -> tour.UpdateTourExecutionResponse
+	10, // 61: tour.TourService.CheckKeypointProximity:output_type -> tour.CheckKeypointProximityResponse
+	37, // 62: tour.TourService.GetCompletionStatus:output_type -> tour.GetCompletionStatusResponse
+	41, // 63: tour.TourService.CheckReviewExists:output_type -> tour.CheckReviewExistsResponse
+	39, // 64: tour.TourService.GetTourExecutionByUserAndTour:output_type -> tour.GetTourExecutionByUserAndTourResponse
+	47, // [47:65] is the sub-list for method output_type
+	29, // [29:47] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_tour_tour_proto_init() }
